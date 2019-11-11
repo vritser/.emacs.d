@@ -1,0 +1,11 @@
+elpa/
+.cache/
+.lsp-*
+forge*
+history
+places
+projectile-bookmarks.eld
+recentf
+^\#.*\#$
+transient/
+logo.png
