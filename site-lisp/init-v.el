@@ -1,4 +1,25 @@
 
+
+
+(setq make-backup-files nil)
+(setq auto-save-default nil)
+
+(setq-default tab-width 4
+	      indent-tabs-mode nil)
+
+(use-package delsel
+  :ensure nil
+  :hook (after-init . delete-selection-mode))
+
+(use-package hungry-delete
+  :diminish
+  :hook (after-init . global-hungry-delete-mode)
+  :config (setq-default hungry-delete-chars-to-skip "\t\f\v"))
+
+
+
+
+
 (defun v-smart-open-line ()
   (interactive)
   (move-end-of-line nil)
@@ -40,16 +61,19 @@
 
 ;; (global-set-key (kbd "TAB") 'indent-for-tab-command)
 
-
-
 ;; projectile key map
 (define-prefix-command 'v-p-map)
 (define-key v-p-map (kbd "f") 'projectile-find-file)
-(define-key v-p-map (kbd "p") 'projectile-open-projects)
+(define-key v-p-map (kbd "p") 'projectile-switch-project)
+(define-key v-p-map (kbd "b") 'projectile-switch-to-buffer)
 
 (define-key xah-fly-leader-key-map (kbd "p") v-p-map)
 
+;; remap xah-fly-h-keymap
+(define-key xah-fly-h-keymap (kbd "j") 'avy-goto-char-timer)
+(define-key xah-fly-h-keymap (kbd "i") 'counsel-imenu)
 
-
+;; xah i map  remap
+(define-key xah-fly-c-keymap (kbd "j") 'counsel-recentf)
 
 (provide 'init-v)
