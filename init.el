@@ -10,6 +10,7 @@
 (require 'init-custom)
 (require 'init-package)
 (require 'init-base)
+(require 'init-dashboard)
 
 (require 'init-xah-fly-keys)
 (require 'init-thing-edit)
@@ -23,3 +24,7 @@
 (require 'init-company)
 (require 'init-go)
 (require 'init-lsp)
+(require 'init-highlight)
+(require 'init-ivy)
+(require 'init-prog)
+(require 'init-magit)
