@@ -25,9 +25,10 @@
   (use-package company-prescient
     :init (company-prescient-mode 1))
 
-  (use-package company-tabnine
-    :config
-    (add-to-list 'company-backends #'company-tabnine))
+  ;; (use-package company-tabnine
+  ;;   :bind (("M-/" . company-tabnine))
+  ;;   :config
+  ;;   (add-to-list 'company-backends #'company-tabnine))
 
   (when emacs/>=26p
     (use-package company-box

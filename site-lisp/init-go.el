@@ -14,10 +14,10 @@
   (use-package go-gen-test)
   (use-package gotest
     :bind (:map go-mode-map
-		(", t p" . go-test-current-project)
-		(", t f" . go-test-current-file)
-		(", t t" . go-test-current-test)
-		(", x x" . go-run))))
+		("C-c t p" . go-test-current-project)
+		("C-c t f" . go-test-current-file)
+		("C-c t t" . go-test-current-test)
+		("C-c x x" . go-run))))
 
 
 (provide 'init-go)

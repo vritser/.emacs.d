@@ -4,7 +4,7 @@
   :config
   (global-set-key (kbd "<escape>") 'xah-fly-command-mode-activate))
 
-(require 'xah-fly-keys)
+;; (require 'xah-fly-keys)
 
 (xah-fly-keys-set-layout "qwerty")
 (xah-fly-keys 1)
@@ -139,7 +139,7 @@ Version 2017-01-21"
      ("0" . xah-pop-local-mark-ring)
 
      ("a" . execute-extended-command)
-     ("b" . isearch-forward)
+     ("b" . (lambda () (interactive) (switch-to-buffer (previous-buffer))))
      ("c" . previous-line)
      ("d" . xah-beginning-of-line-or-block)
      ("e" . xah-delete-backward-char-or-bracket-text)

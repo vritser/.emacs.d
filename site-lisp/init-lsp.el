@@ -1,7 +1,8 @@
 (use-package lsp-mode
   :diminish lsp-mode
   :hook ((go-mode js-mode java-mode) . lsp-deferred)
-  :bind (:map lsp-mode-map
+  :bind (("M-RET" . lsp-organize-imports)
+         :map lsp-mode-map
 	      ("C-c C-d" . lsp-describe-thing-at-point))
   :init (setq lsp-auto-guess-root t
 	      lsp-prefer-flymake nil
@@ -20,14 +21,14 @@
 		([remap xref-find-definitions] . lsp-ui-peek-find-definitions)
 		([remap xref-find-references] . lsp-ui-peek-find-references))
     :init (setq lsp-ui-doc-enable t
-		lsp-ui-doc-delay 0.5
+		lsp-ui-doc-delay 0.2
 		lsp-ui-doc-use-webkit nil
 		lsp-ui-include-signature t
 		lsp-ui-doc-position 'top
 		lsp-ui-doc-border (face-foreground 'default)
 		lsp-eldoc-enable-hover nil
 
-		lsp-ui-sideline-enable t
+		lsp-ui-sideline-enable nil
 		lsp-ui-sideline-show-hover nil
 		lsp-ui-sideline-show-diagnostics nil
 		lsp-ui-sideline-ignore-duplicate t)

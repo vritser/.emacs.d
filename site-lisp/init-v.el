@@ -18,6 +18,19 @@
 
 
 
+(defun v-newline ()
+  "newline and auto indent when match pairs."
+  (interactive)
+  (let ((break-open-pair (or (and (looking-back "{") (looking-at "}"))
+                             (and (looking-back ">") (looking-at "<"))
+                             (and (looking-back "(") (looking-at ")"))
+                             (and (looking-back "\\[") (looking-at "\\]")))))
+    (newline)
+    (when break-open-pair
+      (save-excursion
+        (newline)
+        (indent-for-tab-command)))
+  (indent-for-tab-command)))
 
 
 (defun v-smart-open-line ()
@@ -55,6 +68,7 @@
 
 (global-set-key (kbd "C-j") 'v-smart-open-line)
 (global-set-key (kbd "C-S-j") 'v-down-2-lines)
+(global-set-key (kbd "RET") 'v-newline)
 
 (define-key dired-mode-map (kbd "C-k") 'v-dired-up-directory)
 (define-key dired-mode-map (kbd "C-f") 'my-dired-find-file)
@@ -75,5 +89,23 @@
 
 ;; xah i map  remap
 (define-key xah-fly-c-keymap (kbd "j") 'counsel-recentf)
+
+
+
+
+
+
+
+(defun v-backward-paragraph ()
+  "Move backward to  beginning of paragraph"
+  (interactive "p")
+  (forward-paragraph prefix-numeric-value))
+
+;; (global-set-key (kbd "C-[") 'v-backward-paragraph)
+
+(global-set-key (kbd "M-i") 'beginning-of-defun)
+(global-set-key (kbd "M-k") 'end-of-defun)
+
+
 
 (provide 'init-v)
