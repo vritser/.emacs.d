@@ -47,14 +47,18 @@
 (tool-bar-mode 0)
 (scroll-bar-mode 0)
 (menu-bar-mode 0)
-
-
+;; (set-frame-parameter (car (frame-list)) 'undecorated t)
+;; (setq ns-transparent-titlebar t)
+;; (setq ns-appearance t)
 
 (set-face-attribute 'default nil
 		    :height 160
 		    :family "Monaco"
 		    :weight 'normal
 		    :width 'normal)
+
+(add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
+(add-to-list 'default-frame-alist '(ns-appearance . dark))
 
 
 
