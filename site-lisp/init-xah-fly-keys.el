@@ -4,7 +4,7 @@
   :config
   (global-set-key (kbd "<escape>") 'xah-fly-command-mode-activate))
 
-;; (require 'xah-fly-keys)
+(require 'xah-fly-keys)
 
 (xah-fly-keys-set-layout "qwerty")
 (xah-fly-keys 1)
