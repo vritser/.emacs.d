@@ -3,6 +3,12 @@
 
 (setq make-backup-files nil)
 (setq auto-save-default nil)
+(setq help-window-select t)
+
+;; Let help window display at bottom
+(add-to-list 'display-buffer-alist
+             `("*Help*"
+               (display-buffer-at-bottom)))
 
 (setq-default tab-width 4
 	      indent-tabs-mode nil)
@@ -46,11 +52,16 @@
 
 (defun v-open-line-indent ()
   (interactive)
-  (move-beginning-of-line nil)
-  (newline-and-indent)
-  (forward-line -1)
+  (if (looking-at ".+")
+      (progn
+        (move-beginning-of-line nil)
+        (newline)
+        (forward-line -1))
+    (save-excursion
+      (newline)))
+
   (indent-according-to-mode)
-)
+  )
 
 (defun my-dired-find-file ()
   "Open buffer on another window"
@@ -69,26 +80,33 @@
 (global-set-key (kbd "C-j") 'v-smart-open-line)
 (global-set-key (kbd "C-S-j") 'v-down-2-lines)
 (global-set-key (kbd "RET") 'v-newline)
+(global-set-key (kbd "C-o") 'v-open-line-indent)
 
-(define-key dired-mode-map (kbd "C-k") 'v-dired-up-directory)
-(define-key dired-mode-map (kbd "C-f") 'my-dired-find-file)
+
+;; Projectile shortkey configuration
+(global-set-key (kbd "C-x p p") 'projectile-switch-project)
+(global-set-key (kbd "C-x p f") 'projectile-find-file)
+(global-set-key (kbd "C-x p b") 'projectile-switch-to-buffer)
+
+;; (define-key dired-mode-map (kbd "C-k") 'v-dired-up-directory)
+;; (define-key dired-mode-map (kbd "C-f") 'my-dired-find-file)
 
 ;; (global-set-key (kbd "TAB") 'indent-for-tab-command)
 
 ;; projectile key map
-(define-prefix-command 'v-p-map)
-(define-key v-p-map (kbd "f") 'projectile-find-file)
-(define-key v-p-map (kbd "p") 'projectile-switch-project)
-(define-key v-p-map (kbd "b") 'projectile-switch-to-buffer)
+;;(define-prefix-command 'v-p-map)
+;;(define-key v-p-map (kbd "f") 'projectile-find-file)
+;;(define-key v-p-map (kbd "p") 'projectile-switch-project)
+;;(define-key v-p-map (kbd "b") 'projectile-switch-to-buffer)
 
-(define-key xah-fly-leader-key-map (kbd "p") v-p-map)
+;;(define-key xah-fly-leader-key-map (kbd "p") v-p-map)
 
 ;; remap xah-fly-h-keymap
-(define-key xah-fly-h-keymap (kbd "j") 'avy-goto-char-timer)
-(define-key xah-fly-h-keymap (kbd "i") 'counsel-imenu)
+;;(define-key xah-fly-h-keymap (kbd "j") 'avy-goto-char-timer)
+;;(define-key xah-fly-h-keymap (kbd "i") 'counsel-imenu)
 
 ;; xah i map  remap
-(define-key xah-fly-c-keymap (kbd "j") 'counsel-recentf)
+;;(define-key xah-fly-c-keymap (kbd "j") 'counsel-recentf)
 
 
 

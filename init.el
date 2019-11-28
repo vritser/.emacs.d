@@ -12,7 +12,7 @@
 (require 'init-base)
 (require 'init-dashboard)
 
-(require 'init-xah-fly-keys)
+;; (require 'init-xah-fly-keys)
 (require 'init-thing-edit)
 (require 'init-projectile)
 (require 'init-v)
@@ -28,3 +28,10 @@
 (require 'init-ivy)
 (require 'init-prog)
 (require 'init-magit)
+(require 'init-trans)
+(require 'init-web)
+
+
+
+(put 'downcase-region 'disabled nil)
+(put 'upcase-region 'disabled nil)
