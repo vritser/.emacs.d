@@ -1,3 +1,6 @@
 [submodule "site-lisp/extensions/awesome-pair"]
 	path = site-lisp/extensions/awesome-pair
 	url = https://github.com/manateelazycat/awesome-pair.git
+[submodule "site-lisp/extensions/thing-edit"]
+	path = site-lisp/extensions/thing-edit
+	url = https://github.com/manateelazycat/thing-edit.git
