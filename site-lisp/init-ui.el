@@ -53,9 +53,10 @@
 
 (set-face-attribute 'default nil
 		    :height 160
-		    :family "Monaco"
+		    :family "Source Code Pro for Powerline"
 		    :weight 'normal
 		    :width 'normal)
+
 
 (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
 (add-to-list 'default-frame-alist '(ns-appearance . dark))

@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: print point
+# key: pp
+# --
+fmt.Printf("Address is %p\n", ${1:args})

@@ -9,6 +9,9 @@
 (add-to-list 'display-buffer-alist
              `("*Help*"
                (display-buffer-at-bottom)))
+(add-to-list 'display-buffer-alist
+             `("*Buffer List*"
+               (display-buffer-same-window)))
 
 (setq-default tab-width 4
 	      indent-tabs-mode nil)
@@ -77,13 +80,38 @@
   (interactive)
   (find-alternate-file ".."))
 
+(defun v-dired-open-dir ()
+  "Goto current directory"
+  (interactive)
+  (dired "."))
+
 (global-set-key (kbd "C-j") 'v-smart-open-line)
-(global-set-key (kbd "C-S-j") 'v-down-2-lines)
+(global-set-key (kbd "M-j") 'v-down-2-lines)
 (global-set-key (kbd "RET") 'v-newline)
 (global-set-key (kbd "C-o") 'v-open-line-indent)
+(global-set-key (kbd "C-a") 'back-to-indentation)
 
+(global-set-key (kbd "C-x k") '(lambda ()
+                                 "Kill current buffer"
+                                 (interactive)
+                                 (kill-buffer (buffer-name))))
 
-;; Projectile shortkey configuration
+;; dired mode key map
+(with-eval-after-load 'dired
+  (define-key dired-mode-map (kbd "C-k") 'v-dired-up-directory))
+(global-set-key (kbd "C-x d") 'v-dired-open-dir)
+(global-set-key (kbd "C-x C-d") 'v-dired-open-dir)
+
+;; imenu keymap
+(global-set-key (kbd "M-m") 'counsel-imenu)
+
+;; avy keymap
+(global-set-key (kbd "C-c j") 'avy-goto-char-timer)
+
+;; snails
+(global-set-key (kbd "C-c C-s") 'snails)
+
+;; Projectile configuration shortkey
 (global-set-key (kbd "C-x p p") 'projectile-switch-project)
 (global-set-key (kbd "C-x p f") 'projectile-find-file)
 (global-set-key (kbd "C-x p b") 'projectile-switch-to-buffer)

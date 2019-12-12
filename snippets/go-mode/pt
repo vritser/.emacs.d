@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: println type
+# key: pt
+# --
+fmt.Printf("Type is %T\n", ${1:args})
