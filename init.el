@@ -15,8 +15,8 @@
 ;; (require 'init-xah-fly-keys)
 (require 'init-thing-edit)
 (require 'init-projectile)
-(require 'init-v)
 (require 'init-ui)
+(require 'init-v)
 
 (require 'init-yasnippet)
 (require 'init-awesome-pair)
@@ -30,7 +30,9 @@
 (require 'init-magit)
 (require 'init-trans)
 (require 'init-web)
-
+(require 'init-snails)
+(require 'init-scala)
+(require 'init-protobuf)
 
 
 (put 'downcase-region 'disabled nil)

@@ -1,12 +1,13 @@
 (use-package lsp-mode
   :diminish lsp-mode
-  :hook ((go-mode js-mode java-mode) . lsp-deferred)
+  :hook ((go-mode js-mode java-mode scala-mode) . lsp-deferred)
   :bind (("M-RET" . lsp-organize-imports)
          :map lsp-mode-map
 	      ("C-c C-d" . lsp-describe-thing-at-point))
   :init (setq lsp-auto-guess-root t
 	      lsp-prefer-flymake nil
-	      flymake-fringe-indicator-position 'right-fringe)
+	      flymake-fringe-indicator-position 'right-fringe
+          lsp-gopls-server-args '("-mode=stdio" "-logfile=/usr/local/var/log/gopls/lsp.log" "-rpc.trace"))
   :config
   (use-package lsp-clients
     :ensure nil)

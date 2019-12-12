@@ -16,7 +16,9 @@
 	ivy-initial-inputs-alist nil)
   :config
   (with-eval-after-load 'projectile
-    (setq projectile-completion-system 'ivy)))
+    (setq projectile-completion-system 'ivy))
+
+  (use-package smex))
 
 
 (provide 'init-ivy)
