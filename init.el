@@ -33,7 +33,10 @@
 (require 'init-snails)
 (require 'init-scala)
 (require 'init-protobuf)
-
+(require 'init-docker)
+(require 'init-org)
+(require 'init-tools)
+(require 'init-flycheck)
 
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)

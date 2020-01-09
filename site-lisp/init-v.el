@@ -41,9 +41,10 @@
         (indent-for-tab-command)))
   (indent-for-tab-command)))
 
-
+;; dwim
 (defun v-smart-open-line ()
   (interactive)
+
   (move-end-of-line nil)
   (newline-and-indent))
 
@@ -86,10 +87,11 @@
   (dired "."))
 
 (global-set-key (kbd "C-j") 'v-smart-open-line)
-(global-set-key (kbd "M-j") 'v-down-2-lines)
+(global-set-key (kbd "C-m") 'v-down-2-lines)
 (global-set-key (kbd "RET") 'v-newline)
 (global-set-key (kbd "C-o") 'v-open-line-indent)
-(global-set-key (kbd "C-a") 'back-to-indentation)
+;; (global-set-key (kbd "C-a") 'back-to-indentation)
+
 
 (global-set-key (kbd "C-x k") '(lambda ()
                                  "Kill current buffer"
@@ -102,11 +104,18 @@
 (global-set-key (kbd "C-x d") 'v-dired-open-dir)
 (global-set-key (kbd "C-x C-d") 'v-dired-open-dir)
 
+(global-set-key [C-tab] '(lambda ()
+                                 (interactive)
+                                 (switch-to-buffer (other-buffer))))
+                                 ;;(switch-to-buffer (other-buffer (current-buffer) 1))))
+
 ;; imenu keymap
 (global-set-key (kbd "M-m") 'counsel-imenu)
 
 ;; avy keymap
 (global-set-key (kbd "C-c j") 'avy-goto-char-timer)
+(global-set-key (kbd "M-j") 'avy-goto-char-timer)
+(global-set-key (kbd "M-l") 'avy-goto-line)
 
 ;; snails
 (global-set-key (kbd "C-c C-s") 'snails)
