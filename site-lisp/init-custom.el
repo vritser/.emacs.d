@@ -58,7 +58,7 @@
   :group 'centaur
   :type 'string)
 
-(defcustom centaur-package-archives 'emacs-china
+(defcustom centaur-package-archives 'netease
   "Set package archives from which to fetch."
   :group 'centaur
   :type '(choice

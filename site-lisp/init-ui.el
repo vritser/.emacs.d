@@ -1,7 +1,6 @@
 (use-package doom-themes
     :init (load-theme 'doom-snazzy))
 
-
 (use-package all-the-icons
   :if (display-graphic-p)
   :init (unless (or sys/win32p (member "all-the-icons" (font-family-list)))
@@ -61,6 +60,11 @@
 (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
 (add-to-list 'default-frame-alist '(ns-appearance . dark))
 
-
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Compilation mode
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Convert shell escapes to  color
+(add-hook 'compilation-filter-hook
+          (lambda () (ansi-color-apply-on-region (point-min) (point-max))))
 
 (provide 'init-ui)
