@@ -12,7 +12,7 @@
 (require 'init-base)
 (require 'init-dashboard)
 
-;; (require 'init-xah-fly-keys)
+(require 'init-xah-fly-keys)
 (require 'init-thing-edit)
 (require 'init-projectile)
 (require 'init-ui)
