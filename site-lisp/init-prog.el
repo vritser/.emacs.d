@@ -19,5 +19,6 @@
 (use-package lua-mode)
 (use-package csv-mode)
 
+(use-package haskell-mode)
 
 (provide 'init-prog)

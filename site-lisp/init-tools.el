@@ -12,4 +12,7 @@
    '(;; other Babel languages
      (plantuml . t))))
 
+(use-package restclient
+  :defer t)
+
 (provide 'init-tools)
