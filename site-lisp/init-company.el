@@ -14,8 +14,9 @@
   :hook (after-init . global-company-mode)
   :config
   (setq company-tooltip-align-annotations t
-	company-tooltip-limit 12
+	company-tooltip-limit 10
 	company-idle-delay 0
+    company-show-numbers t
 	company-echo-delay (if (display-graphic-p) nil 0)
 	company-minimum-prefix-length 2
 	company-require-match nil
@@ -25,10 +26,11 @@
   (use-package company-prescient
     :init (company-prescient-mode 1))
 
-  ;; (use-package company-tabnine
-  ;;   :bind (("M-/" . company-tabnine))
-  ;;   :config
-  ;;   (add-to-list 'company-backends #'company-tabnine))
+  (use-package company-tabnine
+    :ensure t
+    :bind (("M-/" . company-tabnine))
+    :config
+    (add-to-list 'company-backends '(company-lsp :with company-tabnine :separate)))
 
   (when emacs/>=26p
     (use-package company-box
