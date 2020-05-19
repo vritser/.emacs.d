@@ -31,44 +31,94 @@
 ;;; Code:
 
 (use-package lsp-mode
-  :diminish lsp-mode
-  :hook ((go-mode js-mode js2-mode java-mode scala-mode) . lsp-deferred)
-  :bind (("M-RET" . lsp-execute-code-action)
-         :map lsp-mode-map
-	     ("C-c C-d" . lsp-describe-thing-at-point))
-  :init (setq lsp-auto-guess-root t
-              lsp-enable-on-type-formatting t
-	          lsp-prefer-flymake nil
-	          flymake-fringe-indicator-position 'right-fringe
-              lsp-gopls-server-args '("-mode=stdio" "-logfile=/usr/local/var/log/gopls/lsp.log" "-rpc.trace"))
+  :diminish
+  :defines (lsp-clients-python-library-directories lsp-rust-rls-server-command)
+  :commands (lsp-enable-which-key-integration lsp-format-buffer lsp-organize-imports)
+  :hook ((prog-mode . (lambda ()
+                           (unless (derived-mode-p 'emacs-lisp-mode 'lisp-mode)
+                             (lsp-deferred))))
+            (lsp-mode . (lambda ()
+                          ;; Integrate `which-key'
+                        ;;   (lsp-enable-which-key-integration)
+
+                          ;; Format and organize imports
+                          (unless (apply #'derived-mode-p centaur-lsp-format-on-save-ignore-modes)
+                            (add-hook 'before-save-hook #'lsp-format-buffer t t)
+                            (add-hook 'before-save-hook #'lsp-organize-imports t t)))))
+  :bind (:map lsp-mode-map
+         ("M-RET" . lsp-execute-code-action)         
+	     ("C-c C-d" . lsp-describe-thing-at-point)
+         ([remap xref-find-definitions] . lsp-find-definition)
+         ([remap xref-find-references] . lsp-find-references))
+
+  :init
+  ;; @see https://github.com/emacs-lsp/lsp-mode#performance
+  (setq read-process-output-max (* 1024 1024)) ;; 1MB
+
+  (setq lsp-auto-guess-root t
+        lsp-flycheck-live-reporting nil
+        lsp-keep-workspace-alive nil
+        lsp-prefer-capf t
+        lsp-signature-auto-activate nil
+
+        lsp-enable-file-watchers nil
+        lsp-enable-folding nil
+        lsp-enable-indentation nil
+        lsp-enable-on-type-formatting nil
+        lsp-enable-symbol-highlighting nil
+        ;; lsp-log-io t
+        lsp-prefer-flymake nil
+        lsp-java-jdt-download-url "http://localhost:3000/jdt-language-server-latest.tar.gz"
+	    flymake-fringe-indicator-position 'right-fringe
+        lsp-gopls-server-args '("-mode=stdio" "-logfile=/usr/local/var/log/gopls/lsp.log" "-rpc.trace"))
   :config
-  (use-package lsp-clients
-    :ensure nil)
+(with-no-warnings
+       (defun my-lsp--init-if-visible (func &rest args)
+         "Not enabling lsp in `git-timemachine-mode'."
+         (unless (bound-and-true-p git-timemachine-mode)
+           (apply func args)))
+       (advice-add #'lsp--init-if-visible :around #'my-lsp--init-if-visible))
+
+  (use-package lsp-ivy
+    :after lsp-mode
+    :bind (:map lsp-mode-map
+           ([remap xref-find-apropos] . lsp-ivy-workspace-symbol)
+           ("C-s-." . lsp-ivy-global-workspace-symbol)))
+
+  ;; (require 'lsp-java-boot)
+
+  ;; to enable the lenses
+  ;; (add-hook 'lsp-mode-hook #'lsp-lens-mode)
+  ;; (add-hook 'java-mode-hook #'lsp-java-boot-lens-mode)
 
   (use-package lsp-ui
-    :commands lsp-ui-doc-hide
     :custom-face
-    (lsp-ui-doc-background ((t (:background ,(face-background 'tooltip)))))
+    ;; (lsp-ui-doc-background ((t (:background ,(face-background 'tooltip)))))
     (lsp-ui-sideline-code-action ((t (:inherit warning))))
-
-    :bind (:map lsp-ui-mode-map
-		        ([remap xref-find-definitions] . lsp-ui-peek-find-definitions)
-		        ([remap xref-find-references] . lsp-ui-peek-find-references))
+    :hook (lsp-mode . lsp-ui-mode)
+    :bind (("C-c u" . lsp-ui-imenu)
+           :map lsp-ui-mode-map
+           ("M-<f6>" . lsp-ui-hydra/body)
+           ("M-RET" . lsp-ui-sideline-apply-code-actions))
     :init (setq lsp-ui-doc-enable t
-		        lsp-ui-doc-delay 0.2
-		        lsp-ui-doc-use-webkit nil
-		        ;; lsp-ui-include-signature t
+                lsp-ui-doc-use-webkit nil
+		        lsp-ui-doc-delay 1
+		        lsp-ui-include-signature t
 		        lsp-ui-doc-position 'at-point
-                lsp-ui-doc-enable nil
-                lsp-ui-peek-enable t
-		        ;; lsp-ui-doc-border (face-foreground 'default)
-                ;; lsp-ui-doc-border "violet"
-		        lsp-eldoc-enable-hover nil
+                                		        lsp-ui-doc-border (face-foreground 'default)
+                		        lsp-eldoc-enable-hover nil
 
 		        lsp-ui-sideline-enable nil
 		        lsp-ui-sideline-show-hover nil
 		        lsp-ui-sideline-show-diagnostics nil
-		        lsp-ui-sideline-ignore-duplicate t)
+                lsp-ui-sideline-show-code-actions t
+		        lsp-ui-sideline-ignore-duplicate t
+
+                 lsp-ui-imenu-enable t
+                 lsp-ui-imenu-colors `(,(face-foreground 'font-lock-keyword-face)
+                                       ,(face-foreground 'font-lock-string-face)
+                                       ,(face-foreground 'font-lock-constant-face)
+                                       ,(face-foreground 'font-lock-variable-name-face)))
     :config
     (add-to-list 'lsp-ui-doc-frame-parameters '(right-fringe . 8))
 
@@ -80,15 +130,25 @@
 		        (set-face-background 'lsp-ui-doc-background
 				                     (face-background 'tooltip))))
 
-    (use-package company-lsp
-      :init (setq company-lsp-cache-candidates 'auto))
+    ;; (use-package company-lsp
+    ;;   :init (setq company-lsp-cache-candidates 'auto))
+
+    ;; (use-package company-lsp
+    ;;   :after company
+    ;;   :defines company-backends
+    ;;   :functions company-backend-with-yas
+    ;;   :init (cl-pushnew (company-backend-with-yas 'company-lsp) company-backends))
+
+    ;; Microsoft python-language-server support
+    (use-package lsp-python-ms
+      :hook (python-mode . (lambda () (require 'lsp-python-ms)))
+      :init
+      (when (executable-find "python3")
+        (setq lsp-python-ms-python-executable-cmd "python3")))
 
     (use-package lsp-java
-      ;; :hook (java-mode . (lambda ()
-	  ;;   	   (require 'lsp-java)
-	  ;;   	   (lsp-deferred))))
-      :ensure t
-      :after lsp-mode
+      :defer t
+      :hook (java-mode . (lambda () (require 'lsp-java)))
       :init
       (setq lsp-java-vmargs
             (list
@@ -101,7 +161,9 @@
 
             ;; Don't organise imports on save
             lsp-java-save-action-organize-imports nil
-            lsp-java-jdt-download-url "http://localhost:3000/jdt-language-server-latest.tar.gz"
+            ;; lsp-java-jdt-download-url "http://localhost:3000/jdt-language-server-latest.tar.gz"
+            lsp-java-jdt-download-url "http://localhost:3000"
+            ;; lsp-java-boot-java-tools-jar
 
             ;; Currently (2019-04-24), dap-mode works best with Oracle
             ;; JDK, see https://github.com/emacs-lsp/dap-mode/issues/31
@@ -109,46 +171,52 @@
             ;; lsp-java-java-path "~/.emacs.d/oracle-jdk-12.0.1/bin/java"
             ;; lsp-java-java-path "/usr/lib/jvm/java-11-openjdk-amd64/bin/java"
             ))
-    (use-package dap-mode
-      :ensure t
-      :after lsp-mode
+
+    (use-package dap-java
+      :ensure nil
+      :after (lsp-java)
       :config
-      (dap-mode t)
-      (dap-ui-mode t)
-      (dap-tooltip-mode 1)
-      (tooltip-mode 1)
+      (global-set-key (kbd "<f7>") 'dap-step-in)
+      (global-set-key (kbd "<f8>") 'dap-next)
+      (global-set-key (kbd "<f9>") 'dap-continue))
+    ))
 
-      ;; (dap-register-debug-template "My Runner"
-      ;;                              (list :type "java"
-      ;;                                    :request "launch"
-      ;;                                    :args ""
-      ;;                                    :vmArgs "-ea -Dmyapp.instance.name=myapp_1"
-      ;;                                    :projectName "myapp"
-      ;;                                    :mainClass "com.domain.AppRunner"
-      ;;                                    :env '(("DEV" . "1"))))
+(add-hook 'java-mode-hook (lambda () (gradle-mode 1)))
 
-      ;; (dap-register-debug-template
-      ;;  "localhost:5005"
-      ;;  (list :type "java"
-      ;;        :request "attach"
-      ;;        :hostName "localhost"
-      ;;        :port 5005))
-    )
+(use-package dap-mode
+  :defer t
+  :diminish
+  :bind (:map lsp-mode-map ("<f5>" . dap-debug))
+  :hook ((after-init . dap-mode)
+         (go-mode . (lambda () (require 'dap-go)))
+         (java-mode . (lambda () (require 'dap-java)))
+         ((js-mode js2-mode) . (lambda () (require 'dap-node)))
+         (python-mode . (lambda () (require 'dap-python))))
+  :config
+  (dap-ui-mode t)
+  (tooltip-mode 1)
+  (dap-tooltip-mode 1)
 
-      (require 'dap-java)
+  ;; (dap-register-debug-template "My Runner"
+  ;;                              (list :type "java"
+  ;;                                    :request "launch"
+  ;;                                    :args ""
+  ;;                                    :vmArgs "-ea -Dmyapp.instance.name=myapp_1"
+  ;;                                    :projectName "myapp"
+  ;;                                    :mainClass "com.domain.AppRunner"
+  ;;                                    :env '(("DEV" . "1"))))
 
-      (use-package dap-java
-        :ensure nil
-        :after (lsp-java)
-        :config
-        (global-set-key (kbd "<f7>") 'dap-step-in)
-        (global-set-key (kbd "<f8>") 'dap-next)
-        (global-set-key (kbd "<f9>") 'dap-continue))
-      ))
-
+  (dap-register-debug-template
+   "localhost:5005"
+   (list :type "java"
+         :request "attach"
+         :hostName "localhost"
+         :port 5005))
+  )
 
 
 
 (provide 'init-lsp)
 
 ;;; init-lsp.el ends here
+;; (native-compile-async "~/.emacs.d/elpa" 4 t)

@@ -66,11 +66,61 @@
 
 (use-package js2-mode
   :mode "\\.js\\'"
-  :interpreter "node")
+  :interpreter "node"
+  :commands js2-line-break
+  :config
+  (setq js-chain-indent t
+        ;; Don't mishighlight shebang lines
+        js2-skip-preprocessor-directives t
+        javascript-indent-level 2
+        js-indent-level 2
+        css-indent-offset 2
+        ;; let flycheck handle this
+        js2-mode-show-parse-errors nil
+        js2-mode-show-strict-warnings nil
+        ;; Flycheck provides these features, so disable them: conflicting with
+        ;; the eslint settings.
+        js2-strict-trailing-comma-warning nil
+        js2-strict-missing-semi-warning nil
+        ;; maximum fontification
+        js2-highlight-level 3
+        js2-highlight-external-variables t
+        js2-idle-timer-delay 0.1)
+)
+
+;; (use-package tide
+;;   :ensure t
+;;   :hook ((typescript-mode js2-mode) . tide-setup))
+
+
+;; (use-package tide
+;;     :diminish tide-mode
+;;     :defines company-backends
+;;     :preface
+;;     (defun setup-tide-mode ()
+;;       "Setup tide mode."
+;;       (interactive)
+;;       (tide-setup)
+;;       (eldoc-mode 1)
+;;       (tide-hl-identifier-mode 1))
+;;     :hook (((typescript-mode js2-mode) . setup-tide-mode)
+;;            (before-save . tide-format-before-save))
+;;     :config
+;;     (setq tide-format-options
+;;           '(:insertSpaceAfterFunctionKeywordForAnonymousFunctions
+;;             t
+;;             :placeOpenBraceOnNewLineForFunctions
+;;             nil))
+;;     (add-to-list 'company-backends '(company-tide))
+;;     ;; (with-eval-after-load 'company
+;;     ;;   (cl-pushnew ( company-tide) company-backends))
+;;     )
 
 (use-package typescript-mode
   :mode "\\.ts\\'"
-  :commands (typescript-mode))
+  :commands (typescript-mode)
+  :config
+  (setq typescript-indent-level 2))
 
 
 (provide 'init-web)

@@ -1,12 +1,11 @@
 (use-package org
   :ensure nil
-  :defer t
   :custom-face (org-ellipsis ((t (:foreground nil))))
   :bind
   ("C-c l" . org-store-link)
   ("C-c a" . org-agenda)
   ("C-c c" . org-capture)
-  ("C-c b" . org-switch)
+  ("C-c b" . org-switchb)
   ;; (:map org-mode-map ("C-c C-p" . org-export-as-pdf-and-open))
 
   :hook ((org-mode . (lambda ()
@@ -55,6 +54,9 @@
         org-hide-emphasis-markers t
         org-agenda-files '("~/org/"))
 
+  (require 'org-tempo)
+  (add-to-list 'org-modules 'org-tempo)
+
   (setq-default org-capture-templates
                 '(("t" "TODO" entry (file+headline "~/org/gtd.org" "Tasks")
                    "* TODO [#B] %?\n %i\n")
@@ -84,13 +86,11 @@
         org-src-tab-acts-natively t)
 
   (defvar load-language-list '((emacs-lisp . t)
-                               (perl . t)
                                (python . t)
                                (ruby . t)
                                (js . t)
                                (css . t)
                                (sass . t)
-                               (C . t)
                                (java . t)
                                (plantuml . t)))
 
@@ -121,13 +121,6 @@
   (use-package toc-org
     :hook (org-mode . toc-org-mode))
 
-  ;; Export text/html MIME emails
-  (use-package org-mime
-    :bind (:map message-mode-map
-                ("C-c M-o" . org-mime-htmlize)
-                :map org-mode-map
-                ("C-c M-o" . org-mime-org-buffer-htmlize)))
-
   ;; Preview
   (use-package org-preview-html
     :diminish)
@@ -156,14 +149,6 @@
     (org-tree-slide-simple-profile)
     (setq org-tree-slide-skip-outline-level 2))
 
-  ;; Pomodoro
-  (use-package org-pomodoro
-    :custom-face
-    (org-pomodoro-mode-line ((t (:inherit warning))))
-    (org-pomodoro-mode-line-overtime ((t (:inherit error))))
-    (org-pomodoro-mode-line-break ((t (:inherit success))))
-    :bind (:map org-agenda-mode-map
-                ("P" . org-pomodoro)))
 
   ;; (defun org-export-turn-on-syntax-highlight ()
   ;;   "Setup variables to turn on syntax highlighting when calling `org-latex-export-to-pdf'."

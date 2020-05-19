@@ -23,7 +23,39 @@
 (use-package hungry-delete
   :diminish
   :hook (after-init . global-hungry-delete-mode)
-  :config (setq-default hungry-delete-chars-to-skip "\t\f\v"))
+  :config (setq-default hungry-delete-chars-to-skip " \t\n\r\f\v"))
+
+
+(when (string-equal system-type "darwin")
+  ;; macOS
+
+  (define-key key-translation-map (kbd "<deletechar>") (kbd "<delete>"))
+
+
+  (global-set-key (kbd "M--") 'xah-cycle-hyphen-underscore-space)
+
+  (global-set-key (kbd "s-w") 'xah-close-current-buffer)
+  (global-set-key (kbd "s-r") 'xah-html-browse-url-of-buffer)
+  (global-set-key (kbd "s-T") 'xah-open-last-closed)
+  (global-set-key (kbd "s-t") 'xah-new-empty-buffer)
+  (global-set-key (kbd "s-n") 'xah-new-empty-buffer)
+
+  (global-set-key (kbd "s-[") 'xah-previous-user-buffer)
+  (global-set-key (kbd "s-]") 'xah-next-user-buffer)
+
+  (global-set-key (kbd "s-=") 'text-scale-increase)
+  (global-set-key (kbd "s--") 'text-scale-decrease)
+
+  (global-set-key (kbd "<f1>") 'toggle-frame-fullscreen)
+  (global-set-key (kbd "<f2>") 'xah-cut-line-or-region)
+  (global-set-key (kbd "<f3>") 'xah-copy-line-or-region)
+  ;; (global-set-key (kbd "<f11>") 'toggle-frame-fullscreen)
+
+  ;; (global-set-key (kbd "<C-s-268632070>") 'toggle-frame-fullscreen)
+  ;;
+  )
+
+(global-set-key (kbd "s-g") 'magit-status)
 
 
 
@@ -87,9 +119,10 @@
   (dired "."))
 
 (global-set-key (kbd "C-j") 'v-smart-open-line)
-(global-set-key (kbd "C-m") 'v-down-2-lines)
+
+;; (global-set-key (kbd "C-m") 'v-down-2-lines)
 (global-set-key (kbd "RET") 'v-newline)
-(global-set-key (kbd "C-o") 'v-open-line-indent)
+;; (global-set-key (kbd "C-o") 'v-open-line-indent)
 ;; (global-set-key (kbd "C-a") 'back-to-indentation)
 
 
@@ -113,7 +146,7 @@
 (global-set-key (kbd "M-m") 'counsel-imenu)
 
 ;; avy keymap
-(global-set-key (kbd "C-c j") 'avy-goto-char-timer)
+;; (global-set-key (kbd "C-c j") 'avy-goto-char-timer)
 (global-set-key (kbd "M-j") 'avy-goto-char-timer)
 (global-set-key (kbd "M-l") 'avy-goto-line)
 
@@ -162,5 +195,35 @@
 (global-set-key (kbd "M-k") 'end-of-defun)
 
 
+(define-prefix-command 'v-fly-map)
+
+(define-key v-fly-map (kbd "l") 'projectile-switch-project)
+(define-key v-fly-map (kbd "f") 'projectile-find-file)
+
+(define-key xah-fly-leader-key-map (kbd "l") v-fly-map)
+
+
+
+
+(defun get-frame-name (&optional frame)
+  "Return the string that names FRAME (a frame).  Default is selected frame."
+  (unless frame (setq frame  (selected-frame)))
+  (if (framep frame)
+      (cdr (assq 'name (frame-parameters frame)))
+    (error "Function `get-frame-name': Argument not a frame: `%s'" frame)))
+
+;; (set-frame-name "EDIT")
+
+;; (progn
+;;   (make-frame '((name . "TERM")))
+;;   (select-frame-by-name "EDIT")
+;;   (vterm))
+
+;; (assq 'name (frame-parameters (selected-frame)))
+;; (global-set-key (kbd "C-`") (lambda () (interactive) (select-frame-by-name "TERM")))
+
+(defalias 'fmt 'lsp-format-buffer)
+(defalias 'lml 'list-matching-lines)
 
 (provide 'init-v)
+;;; init-v.el ends here

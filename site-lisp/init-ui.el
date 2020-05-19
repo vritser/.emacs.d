@@ -64,7 +64,7 @@
 ;; Compilation mode
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Convert shell escapes to  color
-(add-hook 'compilation-filter-hook
-          (lambda () (ansi-color-apply-on-region (point-min) (point-max))))
+;; (add-hook 'compilation-filter-hook
+          ;; (lambda () (ansi-color-apply-on-region (point-min) (point-max))))
 
 (provide 'init-ui)

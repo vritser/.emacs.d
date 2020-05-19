@@ -45,7 +45,8 @@
            ("U" . update-config-and-packages)
            ("q" . quit-dashboard)
            ("h" . dashboard-hydra/body)
-           ("?" . dashboard-hydra/body))
+           ("?" . dashboard-hydra/body)
+           ("p" . dashboard-goto-projects))
     :hook (dashboard-mode . (lambda () (setq-local frame-title-format "")))
     :init (dashboard-setup-startup-hook)
     :config

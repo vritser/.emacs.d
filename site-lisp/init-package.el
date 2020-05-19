@@ -110,8 +110,9 @@
 ;; Initialization benchmark
 (when centaur-benchmark
   (use-package benchmark-init
+    :ensure t
     :defines swiper-font-lock-exclude
-    :commands (benchmark-init/activate)
+    ;; :commands (benchmark-init/activate)
     :hook (after-init . benchmark-init/deactivate)
     :init (benchmark-init/activate)
     :config
