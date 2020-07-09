@@ -52,7 +52,7 @@
 
 (set-face-attribute 'default nil
 		    :height 160
-		    :family "Source Code Pro for Powerline"
+		    :family "Monaco"
 		    :weight 'normal
 		    :width 'normal)
 
