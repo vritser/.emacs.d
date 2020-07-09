@@ -13,8 +13,8 @@
              `("*Buffer List*"
                (display-buffer-same-window)))
 
-(setq-default tab-width 4
-	      indent-tabs-mode nil)
+(setq-default tab-width 2
+							indent-tabs-mode nil)
 
 (use-package delsel
   :ensure nil
@@ -34,15 +34,6 @@
 
   (global-set-key (kbd "M--") 'xah-cycle-hyphen-underscore-space)
 
-  (global-set-key (kbd "s-w") 'xah-close-current-buffer)
-  (global-set-key (kbd "s-r") 'xah-html-browse-url-of-buffer)
-  (global-set-key (kbd "s-T") 'xah-open-last-closed)
-  (global-set-key (kbd "s-t") 'xah-new-empty-buffer)
-  (global-set-key (kbd "s-n") 'xah-new-empty-buffer)
-
-  (global-set-key (kbd "s-[") 'xah-previous-user-buffer)
-  (global-set-key (kbd "s-]") 'xah-next-user-buffer)
-
   (global-set-key (kbd "s-=") 'text-scale-increase)
   (global-set-key (kbd "s--") 'text-scale-decrease)
 
@@ -54,8 +45,6 @@
   ;; (global-set-key (kbd "<C-s-268632070>") 'toggle-frame-fullscreen)
   ;;
   )
-
-(global-set-key (kbd "s-g") 'magit-status)
 
 
 
@@ -125,12 +114,6 @@
 ;; (global-set-key (kbd "C-o") 'v-open-line-indent)
 ;; (global-set-key (kbd "C-a") 'back-to-indentation)
 
-
-(global-set-key (kbd "C-x k") '(lambda ()
-                                 "Kill current buffer"
-                                 (interactive)
-                                 (kill-buffer (buffer-name))))
-
 ;; dired mode key map
 (with-eval-after-load 'dired
   (define-key dired-mode-map (kbd "C-k") 'v-dired-up-directory))
@@ -163,13 +146,6 @@
 
 ;; (global-set-key (kbd "TAB") 'indent-for-tab-command)
 
-;; projectile key map
-;;(define-prefix-command 'v-p-map)
-;;(define-key v-p-map (kbd "f") 'projectile-find-file)
-;;(define-key v-p-map (kbd "p") 'projectile-switch-project)
-;;(define-key v-p-map (kbd "b") 'projectile-switch-to-buffer)
-
-;;(define-key xah-fly-leader-key-map (kbd "p") v-p-map)
 
 ;; remap xah-fly-h-keymap
 ;;(define-key xah-fly-h-keymap (kbd "j") 'avy-goto-char-timer)
@@ -193,15 +169,6 @@
 
 (global-set-key (kbd "M-i") 'beginning-of-defun)
 (global-set-key (kbd "M-k") 'end-of-defun)
-
-
-(define-prefix-command 'v-fly-map)
-
-(define-key v-fly-map (kbd "l") 'projectile-switch-project)
-(define-key v-fly-map (kbd "f") 'projectile-find-file)
-
-(define-key xah-fly-leader-key-map (kbd "l") v-fly-map)
-
 
 
 

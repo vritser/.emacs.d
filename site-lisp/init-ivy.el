@@ -19,7 +19,7 @@
 
   (setq ivy-initial-inputs-alist nil)
   (setq ivy-re-builders-alist
-      '((counsel-M-x . ivy--regex-fuzzy) ; Only counsel-M-x use flx fuzzy search
+      '((counsel-M-x . ivy--regex-plus) ; Only counsel-M-x use flx fuzzy search
         (t . ivy--regex-plus)))
 
   :config
