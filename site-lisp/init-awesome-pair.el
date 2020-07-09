@@ -1,6 +1,6 @@
 (require 'awesome-pair)
 
-
+;;; Code:
 (dolist (hook (list
                'c-mode-common-hook
                'c-mode-hook
@@ -29,6 +29,8 @@
                'lua-mode-hook
                'swift-mode-hook
                'minibuffer-inactive-mode-hook
+               'typescript-mode-hook
+               'restclient-mode
                ))
   (add-hook hook '(lambda () (awesome-pair-mode 1))))
 
@@ -80,3 +82,5 @@
 
 
 (provide 'init-awesome-pair)
+
+;;; init-awesome-pair ends here
