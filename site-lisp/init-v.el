@@ -1,9 +1,8 @@
-
-
-
 (setq make-backup-files nil)
 (setq auto-save-default nil)
 (setq help-window-select t)
+(setq-default tab-width 2
+							indent-tabs-mode nil)
 
 ;; Let help window display at bottom
 (add-to-list 'display-buffer-alist
@@ -12,9 +11,6 @@
 (add-to-list 'display-buffer-alist
              `("*Buffer List*"
                (display-buffer-same-window)))
-
-(setq-default tab-width 2
-							indent-tabs-mode nil)
 
 (use-package delsel
   :ensure nil
@@ -25,31 +21,8 @@
   :hook (after-init . global-hungry-delete-mode)
   :config (setq-default hungry-delete-chars-to-skip " \t\n\r\f\v"))
 
-
-(when (string-equal system-type "darwin")
-  ;; macOS
-
-  (define-key key-translation-map (kbd "<deletechar>") (kbd "<delete>"))
-
-
-  (global-set-key (kbd "M--") 'xah-cycle-hyphen-underscore-space)
-
-  (global-set-key (kbd "s-=") 'text-scale-increase)
-  (global-set-key (kbd "s--") 'text-scale-decrease)
-
-  (global-set-key (kbd "<f1>") 'toggle-frame-fullscreen)
-  (global-set-key (kbd "<f2>") 'xah-cut-line-or-region)
-  (global-set-key (kbd "<f3>") 'xah-copy-line-or-region)
-  ;; (global-set-key (kbd "<f11>") 'toggle-frame-fullscreen)
-
-  ;; (global-set-key (kbd "<C-s-268632070>") 'toggle-frame-fullscreen)
-  ;;
-  )
-
-
-
 (defun v-newline ()
-  "newline and auto indent when match pairs."
+  "Newline and auto indent when match pairs."
   (interactive)
   (let ((break-open-pair (or (and (looking-back "{") (looking-at "}"))
                              (and (looking-back ">") (looking-at "<"))
@@ -107,70 +80,10 @@
   (interactive)
   (dired "."))
 
-(global-set-key (kbd "C-j") 'v-smart-open-line)
-
-;; (global-set-key (kbd "C-m") 'v-down-2-lines)
-(global-set-key (kbd "RET") 'v-newline)
-;; (global-set-key (kbd "C-o") 'v-open-line-indent)
-;; (global-set-key (kbd "C-a") 'back-to-indentation)
-
-;; dired mode key map
-(with-eval-after-load 'dired
-  (define-key dired-mode-map (kbd "C-k") 'v-dired-up-directory))
-(global-set-key (kbd "C-x d") 'v-dired-open-dir)
-(global-set-key (kbd "C-x C-d") 'v-dired-open-dir)
-
-(global-set-key [C-tab] '(lambda ()
-                                 (interactive)
-                                 (switch-to-buffer (other-buffer))))
-                                 ;;(switch-to-buffer (other-buffer (current-buffer) 1))))
-
-;; imenu keymap
-(global-set-key (kbd "M-m") 'counsel-imenu)
-
-;; avy keymap
-;; (global-set-key (kbd "C-c j") 'avy-goto-char-timer)
-(global-set-key (kbd "M-j") 'avy-goto-char-timer)
-(global-set-key (kbd "M-l") 'avy-goto-line)
-
-;; snails
-(global-set-key (kbd "C-c C-s") 'snails)
-
-;; Projectile configuration shortkey
-(global-set-key (kbd "C-x p p") 'projectile-switch-project)
-(global-set-key (kbd "C-x p f") 'projectile-find-file)
-(global-set-key (kbd "C-x p b") 'projectile-switch-to-buffer)
-
-;; (define-key dired-mode-map (kbd "C-k") 'v-dired-up-directory)
-;; (define-key dired-mode-map (kbd "C-f") 'my-dired-find-file)
-
-;; (global-set-key (kbd "TAB") 'indent-for-tab-command)
-
-
-;; remap xah-fly-h-keymap
-;;(define-key xah-fly-h-keymap (kbd "j") 'avy-goto-char-timer)
-;;(define-key xah-fly-h-keymap (kbd "i") 'counsel-imenu)
-
-;; xah i map  remap
-;;(define-key xah-fly-c-keymap (kbd "j") 'counsel-recentf)
-
-
-
-
-
-
-
 (defun v-backward-paragraph ()
   "Move backward to  beginning of paragraph"
   (interactive "p")
   (forward-paragraph prefix-numeric-value))
-
-;; (global-set-key (kbd "C-[") 'v-backward-paragraph)
-
-(global-set-key (kbd "M-i") 'beginning-of-defun)
-(global-set-key (kbd "M-k") 'end-of-defun)
-
-
 
 (defun get-frame-name (&optional frame)
   "Return the string that names FRAME (a frame).  Default is selected frame."
@@ -191,6 +104,41 @@
 
 (defalias 'fmt 'lsp-format-buffer)
 (defalias 'lml 'list-matching-lines)
+
+;; Keybindings
+(global-set-key (kbd "M-i") 'beginning-of-defun)
+(global-set-key (kbd "M-k") 'end-of-defun)
+
+(global-set-key (kbd "C-j") 'v-smart-open-line)
+;; (global-set-key (kbd "C-m") 'v-down-2-lines)
+;; (global-set-key (kbd "RET") 'v-newline)
+;; (global-set-key (kbd "C-o") 'v-open-line-indent)
+;; (global-set-key (kbd "C-a") 'back-to-indentation)
+
+;; (global-set-key (kbd "C-x d") 'v-dired-open-dir)
+;; (global-set-key (kbd "C-x C-d") 'v-dired-open-dir)
+
+(global-set-key [C-tab] '(lambda ()
+                                 (interactive)
+                                 (switch-to-buffer (other-buffer))))
+                                 ;;(switch-to-buffer (other-buffer (current-buffer) 1))))
+;; imenu keymap
+(global-set-key (kbd "M-m") 'counsel-imenu)
+
+;; avy keymap
+(global-set-key (kbd "M-j") 'avy-goto-char-timer)
+(global-set-key (kbd "M-l") 'avy-goto-line)
+
+
+(global-set-key (kbd "s-g") 'magit-status)
+;; snails
+;; (global-set-key (kbd "C-c C-s") 'snails)
+
+;; Projectile configuration shortkey
+;; (global-set-key (kbd "C-x p p") 'projectile-switch-project)
+;; (global-set-key (kbd "C-x p f") 'projectile-find-file)
+;; (global-set-key (kbd "C-x p b") 'projectile-switch-to-buffer)
+
 
 (provide 'init-v)
 ;;; init-v.el ends here
