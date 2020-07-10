@@ -28,17 +28,16 @@
                              (and (looking-back ">") (looking-at "<"))
                              (and (looking-back "(") (looking-at ")"))
                              (and (looking-back "\\[") (looking-at "\\]")))))
-    (newline)
     (when break-open-pair
       (save-excursion
         (newline)
         (indent-for-tab-command)))
-  (indent-for-tab-command)))
+    (newline-and-indent)))
 
 ;; dwim
 (defun v-smart-open-line ()
+  "Smart open line."
   (interactive)
-
   (move-end-of-line nil)
   (newline-and-indent))
 
@@ -111,7 +110,7 @@
 
 (global-set-key (kbd "C-j") 'v-smart-open-line)
 ;; (global-set-key (kbd "C-m") 'v-down-2-lines)
-;; (global-set-key (kbd "RET") 'v-newline)
+(global-set-key (kbd "RET") 'v-newline)
 ;; (global-set-key (kbd "C-o") 'v-open-line-indent)
 ;; (global-set-key (kbd "C-a") 'back-to-indentation)
 

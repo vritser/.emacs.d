@@ -29,6 +29,7 @@
   (define-key xah-fly-key-map (kbd "C-r") 'v-open-line-indent)
   (define-key xah-fly-key-map (kbd "M-h") 'v-down-2-lines)
   (define-key xah-fly-key-map (kbd "C-n") 'next-line)
+  (define-key xah-fly-key-map (kbd "C-a") 'beginning-of-line)
 
   (define-key xah-fly-insert-map (kbd "<backspace>") 'hungry-delete-backward))
 
