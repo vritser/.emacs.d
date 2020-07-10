@@ -59,7 +59,7 @@
         lsp-flycheck-live-reporting t
         lsp-keep-workspace-alive nil
         lsp-prefer-capf t
-        lsp-signature-auto-activate t
+        lsp-signature-auto-activate nil
 
         lsp-enable-file-watchers nil
         lsp-enable-folding nil
@@ -67,9 +67,6 @@
         lsp-enable-on-type-formatting nil
         lsp-enable-symbol-highlighting nil
         ;; lsp-log-io t
-        lsp-prefer-flymake nil
-        lsp-java-jdt-download-url "http://localhost:3000/jdt-language-server-latest.tar.gz"
-	      flymake-fringe-indicator-position 'right-fringe
         lsp-gopls-server-args '("-mode=stdio" "-logfile=/usr/local/var/log/gopls/lsp.log" "-rpc.trace"))
   :config
   (with-no-warnings
@@ -161,16 +158,10 @@
              )
 
             ;; Don't organise imports on save
-            lsp-java-save-action-organize-imports nil
-            ;; lsp-java-jdt-download-url "http://localhost:3000/jdt-language-server-latest.tar.gz"
-            lsp-java-jdt-download-url "http://localhost:3000"
-            ;; lsp-java-boot-java-tools-jar
+            lsp-java-save-actions-organize-imports nil
 
             ;; Currently (2019-04-24), dap-mode works best with Oracle
             ;; JDK, see https://github.com/emacs-lsp/dap-mode/issues/31
-            ;;
-            ;; lsp-java-java-path "~/.emacs.d/oracle-jdk-12.0.1/bin/java"
-            ;; lsp-java-java-path "/usr/lib/jvm/java-11-openjdk-amd64/bin/java"
             ))
 
     (use-package dap-java
@@ -211,4 +202,3 @@
 (provide 'init-lsp)
 
 ;;; init-lsp.el ends here
-;; (native-compile-async "~/.emacs.d/elpa" 4 t)
