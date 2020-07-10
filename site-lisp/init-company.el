@@ -1,3 +1,28 @@
+;;; init-company.el ---                              -*- lexical-binding: t; -*-
+
+;; Copyright (C) 2020  vritser
+
+;; Author: vritser <vritser@gmail.com>
+;; Keywords: abbrev, extensions
+
+;; This program is free software; you can redistribute it and/or modify
+;; it under the terms of the GNU General Public License as published by
+;; the Free Software Foundation, either version 3 of the License, or
+;; (at your option) any later version.
+
+;; This program is distributed in the hope that it will be useful,
+;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+
+;; You should have received a copy of the GNU General Public License
+;; along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+;;; Commentary:
+
+;;
+
+;;; Code:
 
 (use-package company
   :diminish company-mode
@@ -13,24 +38,31 @@
 	 ("C-n" . company-select-next))
   :hook (after-init . global-company-mode)
   :config
-  (setq company-tooltip-align-annotations t
-	company-tooltip-limit 10
-	company-idle-delay 0
-    company-show-numbers t
-	company-echo-delay (if (display-graphic-p) nil 0)
-	company-minimum-prefix-length 2
-	company-require-match nil
-	company-dabbrev-ignore-case nil
-	company-dabbrev-downcase nil)
+  (setq
+   company-tooltip-align-annotations t
+	 company-tooltip-limit 10
+	 company-idle-delay 0
+   company-show-numbers t
+	 company-echo-delay (if (display-graphic-p) nil 0)
+	 company-minimum-prefix-length 1
+	 company-require-match nil
+	 company-dabbrev-ignore-case t
+	 company-dabbrev-downcase nil)
+   (setq company-backends (delete 'company-xcode company-backends))
+   (setq company-backends (delete 'company-bbdb company-backends))
+   (setq company-backends (delete 'company-eclim company-backends))
+   (setq company-backends (delete 'company-gtags company-backends))
+   (setq company-backends (delete 'company-etags company-backends))
+   (setq company-backends (delete 'company-oddmuse company-backends))
 
   (use-package company-prescient
     :init (company-prescient-mode 1))
 
-  (use-package company-tabnine
-    :ensure t
-    :bind (("M-/" . company-tabnine))
-    :config
-    (add-to-list 'company-backends '(company-lsp :with company-tabnine :separate)))
+  ;; (use-package company-tabnine
+  ;;   :ensure t
+  ;;   :bind (("M-/" . company-tabnine))
+  ;;   :config
+  ;;   (add-to-list 'company-backends '(company-lsp :with company-tabnine :separate)))
 
   (when emacs/>=26p
     (use-package company-box
@@ -133,5 +165,5 @@
       :init (setq company-quickhelp-delay 0.5))))
 
 
-
 (provide 'init-company)
+;;; init-company.el ends here
