@@ -1,4 +1,32 @@
+;;; init-tools.el ---                                -*- lexical-binding: t; -*-
+
+;; Copyright (C) 2020  vritser
+
+;; Author: vritser <vritser@gmail.com>
+;; Keywords: tools
+
+;; This program is free software; you can redistribute it and/or modify
+;; it under the terms of the GNU General Public License as published by
+;; the Free Software Foundation, either version 3 of the License, or
+;; (at your option) any later version.
+
+;; This program is distributed in the hope that it will be useful,
+;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+
+;; You should have received a copy of the GNU General Public License
+;; along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+;;; Commentary:
+
+;;
+
+;;; Requires:
+
 (require 'init-const)
+
+;;; Code:
 
 (use-package plantuml-mode
   :defer t
@@ -61,5 +89,23 @@
 
 (use-package quickrun)
 
+(use-package vterm
+  :ensure t)
+
+(use-package vterm-toggle
+  :bind ("C-`" . vterm-toggle)
+  :ensure t)
+
+(setq vterm-toggle-fullscreen-p nil)
+(add-to-list 'display-buffer-alist
+             '((lambda(bufname _) (with-current-buffer bufname (equal major-mode 'vterm-mode)))
+                (display-buffer-reuse-window display-buffer-at-bottom)
+                ;;(display-buffer-reuse-window display-buffer-in-direction)
+                ;;display-buffer-in-direction/direction/dedicated is added in emacs27
+                ;;(direction . bottom)
+                ;;(dedicated . t) ;dedicated is supported in emacs27
+                (reusable-frames . visible)
+                (window-height . 0.5)))
 
 (provide 'init-tools)
+;;; init-tools.el ends here

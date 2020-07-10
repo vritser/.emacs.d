@@ -1,3 +1,30 @@
+;;; init-v.el ---                                    -*- lexical-binding: t; -*-
+
+;; Copyright (C) 2020  vritser
+
+;; Author: vritser <vritser@gmail.com>
+;; Keywords: convenience
+
+;; This program is free software; you can redistribute it and/or modify
+;; it under the terms of the GNU General Public License as published by
+;; the Free Software Foundation, either version 3 of the License, or
+;; (at your option) any later version.
+
+;; This program is distributed in the hope that it will be useful,
+;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+
+;; You should have received a copy of the GNU General Public License
+;; along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+;;; Commentary:
+
+;;
+
+;;; Code:
+
+
 (setq make-backup-files nil)
 (setq auto-save-default nil)
 (setq help-window-select t)
@@ -34,7 +61,6 @@
         (indent-for-tab-command)))
     (newline-and-indent)))
 
-;; dwim
 (defun v-smart-open-line ()
   "Smart open line."
   (interactive)
@@ -61,7 +87,7 @@
   )
 
 (defun my-dired-find-file ()
-  "Open buffer on another window"
+  "Open buffer on another window."
   (interactive)
   (let ((filename (dired-get-filename nil t)))
     ;; first element of attributes represents is it a folder
@@ -70,17 +96,17 @@
       (dired-find-file-other-window))))
 
 (defun v-dired-up-directory ()
-  "Goto up directory and resue buffer"
+  "Goto up directory and resue buffer."
   (interactive)
   (find-alternate-file ".."))
 
 (defun v-dired-open-dir ()
-  "Goto current directory"
+  "Goto current directory."
   (interactive)
   (dired "."))
 
 (defun v-backward-paragraph ()
-  "Move backward to  beginning of paragraph"
+  "Move backward to  beginning of paragraph."
   (interactive "p")
   (forward-paragraph prefix-numeric-value))
 
@@ -137,7 +163,6 @@
 ;; (global-set-key (kbd "C-x p p") 'projectile-switch-project)
 ;; (global-set-key (kbd "C-x p f") 'projectile-find-file)
 ;; (global-set-key (kbd "C-x p b") 'projectile-switch-to-buffer)
-
 
 (provide 'init-v)
 ;;; init-v.el ends here

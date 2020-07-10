@@ -1,8 +1,35 @@
+;;; init-xah-fly-keys.el ---                         -*- lexical-binding: t; -*-
+
+;; Copyright (C) 2020  vritser
+
+;; Author: vritser <vritser@gmail.com>
+;; Keywords: extensions
+
+;; This program is free software; you can redistribute it and/or modify
+;; it under the terms of the GNU General Public License as published by
+;; the Free Software Foundation, either version 3 of the License, or
+;; (at your option) any later version.
+
+;; This program is distributed in the hope that it will be useful,
+;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+
+;; You should have received a copy of the GNU General Public License
+;; along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+;;; Commentary:
+
+;;
+
+;;; Requires:
+
 ;; must come before loading xah-fly-keys
 ;; (setq xah-fly-use-control-key nil)
 (require 'xah-fly-keys)
 
 ;;; Code:
+
 (xah-fly-keys-set-layout "dvorak")
 (xah-fly-keys 1)
 
@@ -49,6 +76,6 @@
 (add-hook 'xah-fly-insert-mode-activate-hook 'v-fly-insert-map-hook)
 (add-hook 'xah-fly-command-mode-activate-hook 'v-fly-command-map-hook)
 
-(provide 'init-xah-fly-keys)
 
+(provide 'init-xah-fly-keys)
 ;;; init-xah-fly-keys.el ends here
