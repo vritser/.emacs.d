@@ -10,3 +10,6 @@
 [submodule "site-lisp/extensions/nox"]
 	path = site-lisp/extensions/nox
 	url = https://github.com/manateelazycat/nox.git
+[submodule "aweshell"]
+	path = aweshell
+	url = https://github.com/manateelazycat/aweshell.git
