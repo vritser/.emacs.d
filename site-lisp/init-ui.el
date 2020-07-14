@@ -25,7 +25,7 @@
 ;;; Code:
 
 (use-package doom-themes
-    :init (load-theme 'doom-snazzy))
+    :init (load-theme 'doom-one))
 
 (use-package all-the-icons
   :if (display-graphic-p)
@@ -76,6 +76,13 @@
 ;; (setq ns-transparent-titlebar t)
 ;; (setq ns-appearance t)
 
+;; Turn off alarms completely
+(setq ring-bell-function 'ignore)
+
+;; Fullscreen emacs
+(toggle-frame-fullscreen)
+
+;; Set
 (set-face-attribute 'default nil
 		    :height 160
 		    :family "Monaco"
@@ -96,6 +103,17 @@
 (set-face-attribute 'font-lock-function-name-face nil
                     :height 180
                     :weight 'bold)
+
+(use-package doom-modeline
+  :hook (after-init . doom-modeline-mode)
+  :custom
+  (doom-modeline-icon t)
+  (doom-modeline-major-mode-icon t)
+  :config
+  (setq doom-modeline-buffer-file-name-style 'file-name
+        doom-modeline-height 10
+        doom-modeline-project-detection 'projectile
+        doom-modeline-minor-modes nil))
 
 (provide 'init-ui)
 ;;; init-ui.el ends here

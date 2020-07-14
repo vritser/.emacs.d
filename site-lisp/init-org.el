@@ -78,25 +78,20 @@
         org-ellipsis (if (char-displayable-p ?) "  " nil)
         org-pretty-entities nil
         org-hide-emphasis-markers t
-        org-agenda-files '("~/org/"))
+        org-agenda-files '("~/Documents/org/"))
 
   (require 'org-tempo)
   (add-to-list 'org-modules 'org-tempo)
-
-  (setq-default org-capture-templates
-                '(("t" "TODO" entry (file+headline "~/org/gtd.org" "Tasks")
-                   "* TODO [#B] %?\n %i\n")
-                  ("s" "Code Snippet" item (file+headline "~/org/snippets/snippets.org" "Code Snippets")
-                   "- %^{title}\n #+BEGIN_SRC %^{language}\n %?\n #+END_SRC ")))
   ;; (org-export-backends (quote (ascii html icalendar latex md odt)))
   ;; (org-todo-keywords
   ;; '((sequence "TODO" "IN-PROGRESS" "REVIEW" "|" "DONE")))
   :config
   ;; Prettify UI
   (use-package org-bullets
-    :if (char-displayable-p ?⚫)
+    ;; :if (char-displayable-p ?⚫)
     :hook (org-mode . org-bullets-mode)
-    :init (setq org-bullets-bullet-list '("⚫" "⚫" "⚫" "⚫")))
+    ;; :init (setq org-bullets-bullet-list '("⚫" "⚫" "⚫" "⚫"))
+    )
 
   (use-package org-fancy-priorities
     :diminish
@@ -151,6 +146,9 @@
   (use-package org-preview-html
     :diminish)
 
+  (use-package ox-hugo
+    :after ox)
+
   ;; Presentation
   (use-package org-tree-slide
     :diminish
@@ -197,6 +195,29 @@
   ;;           (find-file-other-window pdf-name))
   ;;       (find-file-other-window pdf-name))
   ;;     (delete-file (concat (substring pdf-path 0 (string-match "[^\.]*\/?$" pdf-path)) "tex"))))
+
+  (defun v-org-hugo-new-subtree-post-capture-template ()
+    "Returns `org-capture` template string for the new Hugo post."
+    (let* ((title (read-from-minibuffer "Post Title: "))
+           (fname (org-hugo-slug title)))
+      (mapconcat #'identity `(
+                              ,(concat "*** TODO " title)
+                              ":PROPERTIES:"
+                              ,(concat ":EXPORT_FILE_NAME: " fname)
+                              ":END:"
+                              "%?\n")
+                 "\n")))
+
+  (setq-default org-capture-templates
+                '(("t" "TODO" entry (file+headline "~/Documents/org/gtd.org" "Tasks")
+                   "* TODO [#B] %?\n %i\n")
+
+                  ("s" "Code Snippet" item (file+headline "~/Documents/org/snippets/snippets.org" "Code Snippets")
+                   "- %^{title}\n #+BEGIN_SRC %^{language}\n %?\n #+END_SRC ")
+
+                  ("b" "Blog" entry (file+headline "~/Documents/org/blog.org" "Technical Blogs")
+                   (function v-org-hugo-new-subtree-post-capture-template))))
+
   )
 
 (provide 'init-org)
