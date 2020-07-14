@@ -26,10 +26,8 @@
 
 (use-package counsel
   :diminish ivy-mode counsel-mode
-  :bind (("C-s" . swiper-isearch)
-	 ("C-r" . swiper-isearch-backward))
   :hook ((after-init . ivy-mode)
-	 (ivy-mode . counsel-mode))
+	       (ivy-mode . counsel-mode))
 
   :config
   (setq ivy-initial-inputs-alist nil)
@@ -52,7 +50,8 @@
   (with-eval-after-load 'projectile
     (setq projectile-completion-system 'ivy))
 
-  (use-package smex))
+  ;; (use-package smex)
+  )
 
 
 (provide 'init-ivy)

@@ -58,7 +58,7 @@
 (require 'init-magit)
 (require 'init-web)
 (require 'init-scala)
-;; (require 'init-org)
+(require 'init-org)
 (require 'init-tools)
 (require 'init-flycheck)
 
