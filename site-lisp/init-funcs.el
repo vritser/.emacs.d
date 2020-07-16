@@ -52,11 +52,32 @@ point reaches the beginning or end of the buffer, stop there."
   (find-file "~/.emacs.d/init.el"))
 
 (defun publish-hugo-posts-to-github-pages ()
-  "Auto export md and push to github."
+  "Auto publish to github pages."
   (interactive)
+  (org-hugo-export-wim-to-md t nil nil)
   (async-shell-command "sh ~/Documents/org/deploy.sh"))
 
 (defalias 'hp 'publish-hugo-posts-to-github-pages)
+
+(defun my-dired-find-file ()
+  "Open buffer on another window."
+  (interactive)
+  (let ((filename (dired-get-filename nil t)))
+    ;; first element of attributes represents is it a folder
+    (if (car (file-attributes filename))
+        (dired-find-alternate-file)
+      (dired-find-file-other-window))))
+
+(defun v-dired-up-directory ()
+  "Goto up directory and resue buffer."
+  (interactive)
+  (find-alternate-file ".."))
+
+(defun v-dired-open-dir ()
+  "Goto current directory."
+  (interactive)
+  (dired "."))
+
 
 (provide 'init-funcs)
 ;;; init-funcs.el ends here

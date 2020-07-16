@@ -39,6 +39,12 @@
              `("*Buffer List*"
                (display-buffer-same-window)))
 
+;; (add-to-list 'display-buffer-alist
+;;              '("^CAPTURE.*org$" . ((display-buffer-reuse-window
+;;                                     display-buffer-pop-up-window)
+;;                                    . ((inhibit-duplicate-buffer . t)
+;;                                       (inhibit-same-window      . t)))))
+
 (use-package delsel
   :ensure nil
   :hook (after-init . delete-selection-mode))
@@ -85,25 +91,6 @@
 
   (indent-according-to-mode)
   )
-
-(defun my-dired-find-file ()
-  "Open buffer on another window."
-  (interactive)
-  (let ((filename (dired-get-filename nil t)))
-    ;; first element of attributes represents is it a folder
-    (if (car (file-attributes filename))
-        (dired-find-alternate-file)
-      (dired-find-file-other-window))))
-
-(defun v-dired-up-directory ()
-  "Goto up directory and resue buffer."
-  (interactive)
-  (find-alternate-file ".."))
-
-(defun v-dired-open-dir ()
-  "Goto current directory."
-  (interactive)
-  (dired "."))
 
 (defun v-backward-paragraph ()
   "Move backward to  beginning of paragraph."

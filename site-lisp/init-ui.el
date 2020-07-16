@@ -80,8 +80,11 @@
 (setq ring-bell-function 'ignore)
 
 ;; Fullscreen emacs
-(toggle-frame-fullscreen)
-
+;; (toggle-frame-fullscreen)
+;; (require 'frame-maximize)
+;; (toggle-frame-maximized)
+(add-hook 'window-setup-hook 'toggle-frame-maximized t)
+(add-hook 'after-make-frame-functions 'toggle-frame-maximized)
 ;; Set
 (set-face-attribute 'default nil
 		    :height 160

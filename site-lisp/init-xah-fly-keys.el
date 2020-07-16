@@ -57,7 +57,7 @@
   (define-key xah-fly-key-map (kbd "M-h") 'v-down-2-lines)
   (define-key xah-fly-key-map (kbd "C-n") 'next-line)
   (define-key xah-fly-key-map (kbd "C-a") 'beginning-of-line)
-  (define-key xah-fly-key-map (kbd "SPC-u") nil)
+  ;; (define-key xah-fly-key-map (kbd "SPC-u") nil)
 
   (define-key xah-fly-insert-map (kbd "<backspace>") 'hungry-delete-backward))
 
@@ -70,7 +70,7 @@
   ;; (define-key dashboard-mode-map (kbd "r") 'dashboard-goto-recent-files)
   ;; (define-key dashboard-mode-map (kbd "b") 'dashboard-goto-bookmarks)
 
-  (define-key xah-fly-key-map (kbd "SPC u") 'projectile-switch-to-buffer)
+  ;; (define-key xah-fly-key-map (kbd "SPC u") 'projectile-switch-to-buffer)
   (define-key xah-fly-key-map (kbd "C-o") 'counsel-find-file)
   (define-key xah-fly-key-map (kbd "a") 'counsel-M-x)
   (define-key xah-fly-key-map (kbd "b") 'swiper))

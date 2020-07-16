@@ -99,9 +99,9 @@
     (exec-path-from-shell-initialize)))
 
 ;; Start server
-(use-package server
-  :ensure nil
-  :hook (after-init . server-mode))
+;; (use-package server
+;;   :ensure nil
+;;   :hook (after-init . server-mode))
 
 ;; History
 (use-package saveplace
@@ -182,4 +182,6 @@
            ("S-s-<return>" . toggle-frame-fullscreen)
            ("M-S-<return>" . toggle-frame-fullscreen))
 
+
 (provide 'init-base)
+;;; init-base.el ends here
