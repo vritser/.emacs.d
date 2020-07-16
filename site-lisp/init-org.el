@@ -71,20 +71,26 @@
         org-use-speed-commands t
         org-confirm-babel-evaluate nil
         ;;       org-agenda-window-setup 'other-window
+        org-todo-keywords
+        '((sequence "TODO" "IN-PROGRESS" "REVIEW" "|" "DONE"))
         org-tags-column -80
         org-log-done 'time
         org-catch-invisible-edits 'smart
         org-startup-indented t
         org-ellipsis (if (char-displayable-p ?) "  " nil)
         org-pretty-entities nil
-        org-hide-emphasis-markers t
+        org-hide-emphasis-markers nil
+        org-src-tab-acts-natively t
         org-agenda-files '("~/Documents/org/"))
 
   (require 'org-tempo)
+  (require 'org-protocol)
   (add-to-list 'org-modules 'org-tempo)
+  (add-to-list 'org-modules 'org-protocol)
+  (add-to-list 'org-export-backends 'md)
+  (add-to-list 'org-export-backends 'hugo)
   ;; (org-export-backends (quote (ascii html icalendar latex md odt)))
-  ;; (org-todo-keywords
-  ;; '((sequence "TODO" "IN-PROGRESS" "REVIEW" "|" "DONE")))
+
   :config
   ;; Prettify UI
   (use-package org-bullets
@@ -149,7 +155,6 @@
   (use-package ox-hugo
     :after ox)
 
-  ;; Presentation
   (use-package org-tree-slide
     :diminish
     :functions (org-display-inline-images
@@ -216,7 +221,11 @@
                    "- %^{title}\n #+BEGIN_SRC %^{language}\n %?\n #+END_SRC ")
 
                   ("b" "Blog" entry (file+headline "~/Documents/org/blog.org" "Technical Blogs")
-                   (function v-org-hugo-new-subtree-post-capture-template))))
+                   (function v-org-hugo-new-subtree-post-capture-template))
+                  ("p" "Protocol" entry (file+headline "~/Documents/org/notes.org" "Inbox")
+                   "* [[%:link][%:description]] \n\n %u \n #+BEGIN_QUOTE\n%i\n#+END_QUOTE\n %?")
+	                ("L" "Protocol Link" entry (file+headline "~/Documents/org/notes.org" "Inbox")
+                   "* %? [[%:link][%:description]] \nCaptured On: %U")))
 
   )
 

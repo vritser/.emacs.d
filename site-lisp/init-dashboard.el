@@ -76,7 +76,7 @@
     :hook (dashboard-mode . (lambda () (setq-local frame-title-format "")))
     :init (dashboard-setup-startup-hook)
     :config
-    (setq dashboard-banner-logo-title "CENTAUR EMACS - Enjoy Programming & Writing"
+    (setq dashboard-banner-logo-title "EMACS - Enjoy Programming & Writing"
           dashboard-startup-banner (or centaur-logo 'official)
           dashboard-center-content t
           dashboard-show-shortcuts nil
@@ -94,7 +94,7 @@
                                     (registers . "database"))
 
           dashboard-set-footer t
-          dashboard-footer (format "Powered by Vincent Zhang, %s" (format-time-string "%Y"))
+          dashboard-footer (format "Powered by vritser, %s" (format-time-string "%Y"))
           dashboard-footer-icon (cond ((display-graphic-p)
                                        (all-the-icons-faicon "heart"
                                                              :height 1.1
@@ -131,7 +131,7 @@
     (defun my-banner-path (&rest _)
       "Return the full path to banner."
       (expand-file-name "banner.txt" user-emacs-directory))
-    (advice-add #'dashboard-get-banner-path :override #'my-banner-path)
+    ;; (advice-add #'dashboard-get-banner-path :override #'my-banner-path)
 
     (defvar dashboard-recover-layout-p nil
       "Wether recovers the layout.")
