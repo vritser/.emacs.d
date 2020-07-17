@@ -206,7 +206,7 @@
     (let* ((title (read-from-minibuffer "Post Title: "))
            (fname (org-hugo-slug title)))
       (mapconcat #'identity `(
-                              ,(concat "*** TODO " title)
+                              ,(concat "** TODO " title)
                               ":PROPERTIES:"
                               ,(concat ":EXPORT_FILE_NAME: " fname)
                               ":END:"
@@ -221,7 +221,7 @@
                    "- %^{title}\n #+BEGIN_SRC %^{language}\n %?\n #+END_SRC ")
 
                   ("b" "Blog" entry (file+headline "~/Documents/org/blog.org" "Technical Blogs")
-                   (function v-org-hugo-new-subtree-post-capture-template))
+                   (function v-org-hugo-new-subtree-post-capture-template) :empty-lines-after 1)
                   ("p" "Protocol" entry (file+headline "~/Documents/org/notes.org" "Inbox")
                    "* [[%:link][%:description]] \n\n %u \n #+BEGIN_QUOTE\n%i\n#+END_QUOTE\n %?")
 	                ("L" "Protocol Link" entry (file+headline "~/Documents/org/notes.org" "Inbox")
