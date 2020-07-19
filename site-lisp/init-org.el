@@ -217,8 +217,8 @@
                 '(("t" "TODO" entry (file+headline "~/Documents/org/gtd.org" "Tasks")
                    "* TODO [#B] %?\n %i\n")
 
-                  ("s" "Code Snippet" item (file+headline "~/Documents/org/snippets/snippets.org" "Code Snippets")
-                   "- %^{title}\n #+BEGIN_SRC %^{language}\n %?\n #+END_SRC ")
+                  ("s" "Code Snippet" entry (file+headline "~/Documents/org/snippets.org" "Code Snippets")
+                   "** %^{title}\n #+BEGIN_SRC %^{language}\n %?\n #+END_SRC ")
 
                   ("b" "Blog" entry (file+headline "~/Documents/org/blog.org" "Technical Blogs")
                    (function v-org-hugo-new-subtree-post-capture-template) :empty-lines-after 1)
