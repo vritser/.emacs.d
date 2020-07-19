@@ -73,11 +73,33 @@ point reaches the beginning or end of the buffer, stop there."
   (interactive)
   (find-alternate-file ".."))
 
-(defun v-dired-open-dir ()
-  "Goto current directory."
+;;
+;; 限定场景使用
+;;
+(defun gen-interface-for-model ()
+  "Generate interface for typescript sequelize model."
   (interactive)
-  (dired "."))
+  (save-excursion
+    (let ((types #s(hash-table size 8 test equal data (
+                                                       "INTEGER" "number"
+                                                       "DECIMAL" "number"
+                                                       "DATE" "Date"
+                                                       "STRING" "string"
+                                                       "BOOLEAN" "boolean")))
+          (interface nil)
+          (body nil))
+      (goto-char (point-min))
+      (re-search-forward "app.model.define('\\(.?\\)'" nil t)
+      (if (not (match-string 1))
+          (setq interface (match-string 1))
+        (setq interface (read-from-minibuffer "Interface name: ")))
 
+      (while (re-search-forward "\s?+\\(.+\\):\s?{\n?.*:\s?\\(\\w+\\),?" nil t)
+        (let ((key (match-string 1))
+              (val (match-string 2)))
+          (setq body (concat body key ": " (gethash val types) ";\n"))))
+      (goto-char (point-max))
+      (insert (concat "export interface I" interface " {\n" body "}")))))
 
 (provide 'init-funcs)
 ;;; init-funcs.el ends here
