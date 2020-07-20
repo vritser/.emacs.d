@@ -153,3 +153,5 @@
 
 (provide 'init-v)
 ;;; init-v.el ends here
+;; (setq comp-async-jobs-number 8)
+;; (native-compile-async "~/.emacs.d/elpa" t t)

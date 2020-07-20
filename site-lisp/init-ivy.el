@@ -36,15 +36,15 @@
   (setq enable-recursive-minibuffers t)
 
   (setq ivy-use-selectable-prompt t
-	ivy-use-virtual-buffers t
-	ivy-height 10
-	ivy-count-format "%d "
-	ivy-on-del-error-function nil)
+	      ivy-use-virtual-buffers t
+	      ivy-height 10
+	      ivy-count-format "%d "
+	      ivy-on-del-error-function nil)
 
   (setq ivy-initial-inputs-alist nil)
   (setq ivy-re-builders-alist
-      '((counsel-M-x . ivy--regex-plus) ; Only counsel-M-x use flx fuzzy search
-        (t . ivy--regex-plus)))
+        '((counsel-M-x . ivy--regex-plus) ; Only counsel-M-x use flx fuzzy search
+          (t . ivy--regex-plus)))
 
   :config
   (with-eval-after-load 'projectile
