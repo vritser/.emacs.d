@@ -89,10 +89,10 @@ point reaches the beginning or end of the buffer, stop there."
           (interface nil)
           (body nil))
       (goto-char (point-min))
-      (re-search-forward "app.model.define('\\(.?\\)'" nil t)
-      (if (not (match-string 1))
-          (setq interface (match-string 1))
-        (setq interface (read-from-minibuffer "Interface name: ")))
+      (re-search-forward "app.model.define(\n?\s*'\\(.*\\)'" nil t)
+      (if (empty-string-p (match-string 1))
+          (setq interface (read-from-minibuffer "Interface name: "))
+        (setq interface (match-string 1)))
 
       (while (re-search-forward "\s?+\\(.+\\):\s?{\n?.*:\s?\\(\\w+\\),?" nil t)
         (let ((key (match-string 1))
@@ -100,6 +100,11 @@ point reaches the beginning or end of the buffer, stop there."
           (setq body (concat body key ": " (gethash val types) ";\n"))))
       (goto-char (point-max))
       (insert (concat "export interface I" interface " {\n" body "}")))))
+
+(defun empty-string-p (str)
+  "Return true if STR is empty or nil."
+  (or (null str)
+      (zerop (length (string-trim str)))))
 
 (provide 'init-funcs)
 ;;; init-funcs.el ends here

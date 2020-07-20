@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: sequelize association
+# key: sa
+# --
+
+return class extends `(capitalize (file-name-sans-extension (buffer-name)))` {
+  static associate() {
+    $0
+  }
+}
