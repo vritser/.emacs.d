@@ -49,19 +49,27 @@
   ;; @see https://github.com/emacs-lsp/lsp-mode#performance
   (setq read-process-output-max (* 1024 1024)) ;; 1MB
 
-  (setq lsp-auto-guess-root t
-        lsp-flycheck-live-reporting t
-        lsp-keep-workspace-alive nil
+  (setq lsp-keep-workspace-alive nil
         lsp-prefer-capf t
         lsp-signature-auto-activate nil
+        lsp-eldoc-render-all nil
+        ;; lsp-signature-doc-lines 2
+        lsp-modeline-code-actions-enable nil
 
         lsp-enable-file-watchers nil
+        lsp-enable-file-watchers nil
         lsp-enable-folding nil
-        lsp-enable-indentation nil
-        lsp-enable-on-type-formatting nil
+        lsp-enable-semantic-highlighting nil
         lsp-enable-symbol-highlighting nil
-        ;; lsp-log-io t
-        lsp-gopls-server-args '("-mode=stdio" "-logfile=/usr/local/var/log/gopls/lsp.log" "-rpc.trace"))
+        lsp-enable-text-document-color nil
+        lsp-auto-guess-root t
+
+        lsp-enable-indentation nil
+        lsp-enable-on-type-formatting nil)
+
+  ;; (setq lsp-log-io t)
+  ;; (setq lsp-gopls-server-args '("-mode=stdio" "-logfile=/usr/local/var/log/gopls/lsp.log" "-rpc.trace"))
+
   :config
   (with-no-warnings
        (defun my-lsp--init-if-visible (func &rest args)
@@ -91,9 +99,10 @@
            :map lsp-ui-mode-map
            ("M-<f6>" . lsp-ui-hydra/body)
            ("M-RET" . lsp-ui-sideline-apply-code-actions))
+
     :init (setq lsp-ui-doc-enable nil
                 lsp-ui-doc-use-webkit nil
-		            lsp-ui-doc-delay 1
+		            lsp-ui-doc-delay 0.2
                 lsp-ui-doc-include-signature t
 		            lsp-ui-doc-position 'at-point
                 lsp-ui-doc-border (face-foreground 'default)
