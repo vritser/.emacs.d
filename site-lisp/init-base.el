@@ -99,9 +99,12 @@
     (exec-path-from-shell-initialize)))
 
 ;; Start server
-;; (use-package server
-;;   :ensure nil
-;;   :hook (after-init . server-mode))
+(use-package server
+  :ensure nil
+  :hook (after-init . server-mode)
+  :config
+  (unless (server-running-p)
+    (server-start)))
 
 ;; History
 (use-package saveplace
@@ -144,7 +147,7 @@
          ((prog-mode markdown-mode conf-mode) . enable-trailing-whitespace))
   :init
   (setq column-number-mode t
-        line-number-mode t
+        ;; line-number-mode t
         ;; kill-whole-line t               ; Kill line including '\n'
         line-move-visual nil
         track-eol t                     ; Keep cursor at end of lines. Require line-move-visual is nil.

@@ -36,19 +36,19 @@
 (defgroup centaur nil
   "Centaur Emacs customizations."
   :group 'convenience
-  :link '(url-link :tag "Homepage" "https://github.com/seagle0128/.emacs.d"))
+  :link '(url-link :tag "Homepage" "https://github.com/vritser/.emacs.d"))
 
 (defcustom centaur-logo (expand-file-name "logo.png" user-emacs-directory)
-  "Set Centaur logo. nil means official logo."
+  "Set Centaur logo.  nil means official logo."
   :group 'centaur
   :type 'string)
 
-(defcustom centaur-full-name "Vincent Zhang"
+(defcustom centaur-full-name "vritser"
   "Set user full name."
   :group 'centaur
   :type 'string)
 
-(defcustom centaur-mail-address "seagle0128@gmail.com"
+(defcustom centaur-mail-address "vritser@gmail.com"
   "Set user email address."
   :group 'centaur
   :type 'string)
@@ -96,10 +96,7 @@ If Non-nil, use dashboard, otherwise will restore previous session."
           nil))
 
 (defcustom centaur-lsp-format-on-save-ignore-modes '(c-mode c++-mode)
-  "The modes that don't auto format and organize imports while saving the buffers.
-
-`prog-mode' means ignoring all derived modes.
-"
+  "The modes that don't auto format and organize imports whilesaving the buffers."
   :group 'centaur
   :type 'list)
 
