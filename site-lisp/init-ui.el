@@ -75,7 +75,7 @@
 (menu-bar-mode 0)
 
 ;; Hiden titlebar
-(set-frame-parameter (car (frame-list)) 'undecorated t)
+;; (set-frame-parameter (car (frame-list)) 'undecorated t)
 
 ;; (setq ns-transparent-titlebar t)
 ;; (setq ns-appearance t)
@@ -86,7 +86,7 @@
 ;; Fullscreen emacs
 ;; (toggle-frame-fullscreen)
 ;; (require 'frame-maximize)
-(toggle-frame-maximized)
+;; (toggle-frame-maximized)
 ;; (add-hook 'window-setup-hook 'toggle-frame-maximized t)
 ;; (add-hook 'after-make-frame-functions 'toggle-frame-maximized)
 ;; Set

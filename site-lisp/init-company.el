@@ -44,7 +44,7 @@
 	 company-idle-delay 0
    company-show-numbers t
 	 company-echo-delay (if (display-graphic-p) nil 0)
-	 company-minimum-prefix-length 3
+	 company-minimum-prefix-length 1
 	 company-require-match nil
 	 company-dabbrev-ignore-case t
 	 company-dabbrev-downcase nil)
