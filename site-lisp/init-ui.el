@@ -28,7 +28,7 @@
     :init (load-theme 'doom-one))
 
 (use-package all-the-icons
-  :ensure t
+  ;; :ensure t
   :if (display-graphic-p)
   :init (unless (member "all-the-icons" (font-family-list))
           (all-the-icons-install-fonts t))
