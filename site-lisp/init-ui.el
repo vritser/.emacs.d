@@ -28,8 +28,9 @@
     :init (load-theme 'doom-one))
 
 (use-package all-the-icons
+  :ensure t
   :if (display-graphic-p)
-  :init (unless (or sys/win32p (member "all-the-icons" (font-family-list)))
+  :init (unless (member "all-the-icons" (font-family-list))
           (all-the-icons-install-fonts t))
   :config
   (add-to-list 'all-the-icons-mode-icon-alist
@@ -72,7 +73,10 @@
 (tool-bar-mode 0)
 (scroll-bar-mode 0)
 (menu-bar-mode 0)
-;; (set-frame-parameter (car (frame-list)) 'undecorated t)
+
+;; Hiden titlebar
+(set-frame-parameter (car (frame-list)) 'undecorated t)
+
 ;; (setq ns-transparent-titlebar t)
 ;; (setq ns-appearance t)
 
@@ -82,9 +86,9 @@
 ;; Fullscreen emacs
 ;; (toggle-frame-fullscreen)
 ;; (require 'frame-maximize)
-;; (toggle-frame-maximized)
-(add-hook 'window-setup-hook 'toggle-frame-maximized t)
-(add-hook 'after-make-frame-functions 'toggle-frame-maximized)
+(toggle-frame-maximized)
+;; (add-hook 'window-setup-hook 'toggle-frame-maximized t)
+;; (add-hook 'after-make-frame-functions 'toggle-frame-maximized)
 ;; Set
 (set-face-attribute 'default nil
 		    :height 160
