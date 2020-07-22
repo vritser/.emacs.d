@@ -99,13 +99,13 @@
     ;; :init (setq org-bullets-bullet-list '("⚫" "⚫" "⚫" "⚫"))
     )
 
-  (use-package org-fancy-priorities
-    :diminish
-    :hook (org-mode . org-fancy-priorities-mode)
-    :init (setq org-fancy-priorities-list
-                (if (char-displayable-p ?⯀)
-                    '("⯀" "⯀" "⯀" "⯀")
-                  '("HIGH" "MIDIUM" "LOW" "OPTIONAL"))))
+  ;; (use-package org-fancy-priorities
+  ;;   :diminish
+  ;;   :hook (org-mode . org-fancy-priorities-mode)
+  ;;   :init (setq org-fancy-priorities-list
+  ;;               (if (char-displayable-p ?⯀)
+  ;;                   '("⯀" "⯀" "⯀" "⯀")
+  ;;                 '("HIGH" "MIDIUM" "LOW" "OPTIONAL"))))
 
   ;; Babel
   (setq org-confirm-babel-evaluate nil
@@ -114,10 +114,7 @@
 
   (defvar load-language-list '((emacs-lisp . t)
                                (python . t)
-                               (ruby . t)
                                (js . t)
-                               (css . t)
-                               (sass . t)
                                (java . t)
                                (plantuml . t)))
 
@@ -126,23 +123,23 @@
   ;;     (cl-pushnew '(shell . t) load-language-list)
   ;;   (cl-pushnew '(sh . t) load-language-list))
 
-  (use-package ob-go
-    :init (cl-pushnew '(go . t) load-language-list))
+  ;; (use-package ob-go
+  ;;   :init (cl-pushnew '(go . t) load-language-list))
 
-  (use-package ob-rust
-    :init (cl-pushnew '(rust . t) load-language-list))
+  ;; (use-package ob-rust
+  ;;   :init (cl-pushnew '(rust . t) load-language-list))
 
-  (use-package ob-ipython
-    :if (executable-find "jupyter")     ; DO NOT remove
-    :init (cl-pushnew '(ipython . t) load-language-list))
+  ;; (use-package ob-ipython
+  ;;   :if (executable-find "jupyter")     ; DO NOT remove
+  ;;   :init (cl-pushnew '(ipython . t) load-language-list))
 
   (org-babel-do-load-languages 'org-babel-load-languages
                                load-language-list)
 
   ;; Rich text clipboard
-  (use-package org-rich-yank
-    :bind (:map org-mode-map
-                ("C-M-y" . org-rich-yank)))
+  ;; (use-package org-rich-yank
+  ;;   :bind (:map org-mode-map
+  ;;               ("C-M-y" . org-rich-yank)))
 
   ;; Table of contents
   (use-package toc-org
@@ -155,28 +152,28 @@
   (use-package ox-hugo
     :after ox)
 
-  (use-package org-tree-slide
-    :diminish
-    :functions (org-display-inline-images
-                org-remove-inline-images)
-    :bind (:map org-mode-map
-                ("C-<f7>" . org-tree-slide-mode)
-                :map org-tree-slide-mode-map
-                ("<left>" . org-tree-slide-move-previous-tree)
-                ("<right>" . org-tree-slide-move-next-tree)
-                ("S-SPC" . org-tree-slide-move-previous-tree)
-                ("SPC" . org-tree-slide-move-next-tree))
-    :hook ((org-tree-slide-play . (lambda ()
-                                    (text-scale-increase 4)
-                                    (org-display-inline-images)
-                                    (read-only-mode 1)))
-           (org-tree-slide-stop . (lambda ()
-                                    (text-scale-increase 0)
-                                    (org-remove-inline-images)
-                                    (read-only-mode -1))))
-    :config
-    (org-tree-slide-simple-profile)
-    (setq org-tree-slide-skip-outline-level 2))
+  ;; (use-package org-tree-slide
+  ;;   :diminish
+  ;;   :functions (org-display-inline-images
+  ;;               org-remove-inline-images)
+  ;;   :bind (:map org-mode-map
+  ;;               ("C-<f7>" . org-tree-slide-mode)
+  ;;               :map org-tree-slide-mode-map
+  ;;               ("<left>" . org-tree-slide-move-previous-tree)
+  ;;               ("<right>" . org-tree-slide-move-next-tree)
+  ;;               ("S-SPC" . org-tree-slide-move-previous-tree)
+  ;;               ("SPC" . org-tree-slide-move-next-tree))
+  ;;   :hook ((org-tree-slide-play . (lambda ()
+  ;;                                   (text-scale-increase 4)
+  ;;                                   (org-display-inline-images)
+  ;;                                   (read-only-mode 1)))
+  ;;          (org-tree-slide-stop . (lambda ()
+  ;;                                   (text-scale-increase 0)
+  ;;                                   (org-remove-inline-images)
+  ;;                                   (read-only-mode -1))))
+  ;;   :config
+  ;;   (org-tree-slide-simple-profile)
+  ;;   (setq org-tree-slide-skip-outline-level 2))
 
 
   ;; (defun org-export-turn-on-syntax-highlight ()
