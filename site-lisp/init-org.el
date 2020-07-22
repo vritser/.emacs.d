@@ -212,7 +212,7 @@
 
   (setq-default org-capture-templates
                 '(("t" "TODO" entry (file+headline "~/Documents/org/gtd.org" "Tasks")
-                   "* TODO [#B] %?\n %i\n")
+                   "* TODO %?\n %i\n")
 
                   ("s" "Code Snippet" entry (file+headline "~/Documents/org/snippets.org" "Code Snippets")
                    "** %^{title}\n #+BEGIN_SRC %^{language}\n %?\n #+END_SRC ")
