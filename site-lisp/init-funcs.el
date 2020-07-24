@@ -106,5 +106,40 @@ point reaches the beginning or end of the buffer, stop there."
   (or (null str)
       (zerop (length (string-trim str)))))
 
+
+(define-derived-mode mode org-mode "Youdao-dictionary"
+  "Major mode for viewing Youdao dictionary result.
+\\{youdao-dictionary-mode-map}"
+  (read-only-mode 1)
+  (define-key mode-map "q" 'quit-window))
+
+(defun test-posframe-tip (str)
+  "Show STR using posframe-show."
+  (unless (and (require 'posframe nil t) (posframe-workable-p))
+    (error "Posframe not workable"))
+
+  (let ((word "test"))
+    (if word
+        (progn
+          (with-current-buffer (get-buffer-create "VTEST")
+            (let ((inhibit-read-only t))
+              (erase-buffer)
+              (mode)
+              (insert str)
+              (goto-char (point-min))))
+          (posframe-show "VTEST"
+                         :left-fringe 8
+                         :right-fringe 8
+                         :internal-border-color (face-foreground 'default)
+                         :internal-border-width 1)
+          (unwind-protect
+              (push (read-event) unread-command-events)
+            (progn
+              (posframe-delete "VTEST")
+              (other-frame 0))))
+      (message "Nothing to look up"))))
+
+;; (test-posframe-tip "string")
+
 (provide 'init-funcs)
 ;;; init-funcs.el ends here
