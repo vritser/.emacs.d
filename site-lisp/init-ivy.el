@@ -50,8 +50,7 @@
   (with-eval-after-load 'projectile
     (setq projectile-completion-system 'ivy))
 
-  ;; (use-package smex)
-  )
+  (use-package smex))
 
 
 (provide 'init-ivy)
