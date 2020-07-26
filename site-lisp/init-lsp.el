@@ -145,7 +145,8 @@
       :hook (python-mode . (lambda () (require 'lsp-python-ms)))
       :init
       (when (executable-find "python3")
-        (setq lsp-python-ms-python-executable-cmd "python3")))
+        (setq lsp-python-ms-python-executable-cmd "python3")
+        (setq-default python-shell-interpreter "python3")))
 
     (use-package lsp-java
       :defer t

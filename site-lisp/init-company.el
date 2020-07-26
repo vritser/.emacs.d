@@ -29,13 +29,13 @@
   :defines (company-dabbrev-ignore-case company-dabbrev-downcase)
   :commands company-abort
   :bind (:map company-active-map
-	 ("C-p" . company-select-previous)
-	 ("C-n" . company-select-next)
-	 ("<tab>" . company-complete-selection)
+	            ("C-p" . company-select-previous)
+	            ("C-n" . company-select-next)
+	            ("<tab>" . company-complete-selection)
 
-	 :map company-search-map
-	 ("C-p" . company-select-previous)
-	 ("C-n" . company-select-next))
+	            :map company-search-map
+	            ("C-p" . company-select-previous)
+	            ("C-n" . company-select-next))
   :hook (after-init . global-company-mode)
   :config
   (setq
@@ -48,21 +48,55 @@
 	 company-require-match nil
 	 company-dabbrev-ignore-case t
 	 company-dabbrev-downcase nil)
-   (setq company-backends (delete 'company-xcode company-backends))
-   (setq company-backends (delete 'company-bbdb company-backends))
-   (setq company-backends (delete 'company-eclim company-backends))
-   (setq company-backends (delete 'company-gtags company-backends))
-   (setq company-backends (delete 'company-etags company-backends))
-   (setq company-backends (delete 'company-oddmuse company-backends))
+  (setq company-backends (delete 'company-xcode company-backends))
+  (setq company-backends (delete 'company-bbdb company-backends))
+  (setq company-backends (delete 'company-eclim company-backends))
+  (setq company-backends (delete 'company-gtags company-backends))
+  (setq company-backends (delete 'company-etags company-backends))
+  (setq company-backends (delete 'company-oddmuse company-backends))
 
-  (use-package company-prescient
-    :init (company-prescient-mode 1))
+  ;; (use-package company-prescient
+  ;;   :init (company-prescient-mode 1))
 
   ;; (use-package company-tabnine
   ;;   :ensure t
   ;;   :bind (("M-/" . company-tabnine))
   ;;   :config
   ;;   (add-to-list 'company-backends '(company-lsp :with company-tabnine :separate)))
+
+  (use-package company-tabnine
+    :defer 1
+    :custom (company-tabnine-max-num-results 9)
+    :bind (("M-q" . company-other-backend))
+    :hook
+    (lsp-after-open . (lambda ()
+                        (setq company-tabnine-max-num-results 3)
+                        (add-to-list 'company-transformers 'company//sort-by-tabnine t)
+                        (add-to-list 'company-backends '(company-lsp :with company-tabnine :separate))))
+    (kill-emacs . company-tabnine-kill-process)
+    :config
+    ;; Enable TabNine on default
+    (add-to-list 'company-backends #'company-tabnine)
+
+    ;; Integrate company-tabnine with lsp-mode
+    (defun company//sort-by-tabnine (candidates)
+      (if (or (functionp company-backend)
+              (not (and (listp company-backend) (memq 'company-tabnine company-backend))))
+          candidates
+        (let ((candidates-table (make-hash-table :test #'equal))
+              candidates-lsp
+              candidates-tabnine)
+          (dolist (candidate candidates)
+            (if (eq (get-text-property 0 'company-backend candidate)
+                    'company-tabnine)
+                (unless (gethash candidate candidates-table)
+                  (push candidate candidates-tabnine))
+              (push candidate candidates-lsp)
+              (puthash candidate t candidates-table)))
+          (setq candidates-lsp (nreverse candidates-lsp))
+          (setq candidates-tabnine (nreverse candidates-tabnine))
+          (nconc (seq-take candidates-tabnine 3)
+                 (seq-take candidates-lsp 6))))))
 
   (when emacs/>=26p
     (use-package company-box
@@ -160,7 +194,7 @@
     (use-package company-quickhelp
       :defines company-quickhelp-delay
       :bind (:map company-active-map
-             ([remap company-show-doc-buffer] . company-quickhelp-manual-begin))
+                  ([remap company-show-doc-buffer] . company-quickhelp-manual-begin))
       :hook (global-company-mode . company-quickhelp-mode)
       :init (setq company-quickhelp-delay 0.5))))
 
