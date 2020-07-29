@@ -33,6 +33,8 @@
 
 (use-package xah-fly-keys
   :ensure t
+  :init
+  (require 'xah-fly-keys)
   :config
   (xah-fly-keys-set-layout "dvorak")
   (xah-fly-keys 1)
