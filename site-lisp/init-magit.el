@@ -33,6 +33,11 @@
 (use-package gitconfig-mode)
 (use-package gitignore-mode)
 
+(define-key smerge-mode-map (kbd "C-p") 'smerge-prev)
+(define-key smerge-mode-map (kbd "C-n") 'smerge-next)
+(define-key smerge-mode-map (kbd "C-c u") 'smerge-keep-upper)
+(define-key smerge-mode-map (kbd "C-c o") 'smerge-keep-lower)
+(define-key smerge-mode-map (kbd "C-c a") 'smerge-keep-all)
 
 (provide 'init-magit)
 ;;; init-magit.el ends here
