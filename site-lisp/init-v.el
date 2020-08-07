@@ -134,13 +134,14 @@
                                  (interactive)
                                  (switch-to-buffer (other-buffer))))
                                  ;;(switch-to-buffer (other-buffer (current-buffer) 1))))
+
+(global-set-key (kbd "M-j") 'capitalize-dwim)
 ;; imenu keymap
 (global-set-key (kbd "M-m") 'counsel-imenu)
 
 ;; avy keymap
-(global-set-key (kbd "M-j") 'avy-goto-char-timer)
+(global-set-key (kbd "M-c") 'avy-goto-char-timer)
 (global-set-key (kbd "M-l") 'avy-goto-line)
-
 
 (global-set-key (kbd "s-g") 'magit-status)
 ;; snails

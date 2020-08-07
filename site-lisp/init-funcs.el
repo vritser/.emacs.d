@@ -55,7 +55,7 @@ point reaches the beginning or end of the buffer, stop there."
   "Auto publish to github pages."
   (interactive)
   (org-hugo-export-wim-to-md t nil nil)
-  (async-shell-command "sh ~/Documents/org/deploy.sh"))
+  (async-shell-command "sh ~/org/deploy.sh"))
 
 (defalias 'hp 'publish-hugo-posts-to-github-pages)
 

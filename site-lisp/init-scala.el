@@ -41,6 +41,7 @@
 ;; brew install coursier/formulas/coursier
 
 ;; Install metals
+;; https://scalameta.org/metals/docs/editors/emacs.html
 ;; coursier bootstrap \
 ;;   --java-opt -Xss4m \
 ;;   --java-opt -Xms100m \
@@ -65,8 +66,9 @@
    'self-insert-command
    minibuffer-local-completion-map)
    ;; sbt-supershell kills sbt-mode:  https://github.com/hvesalai/emacs-sbt-mode/issues/152
-   (setq sbt:program-options '("-Dsbt.supershell=false"))
-)
+   (setq sbt:program-options '("-Dsbt.supershell=false" "-Dmetals.client=emacs")))
+
+(use-package lsp-metals)
 
 
 (provide 'init-scala)
