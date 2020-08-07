@@ -33,10 +33,7 @@
   :ensure nil
   :hook (after-init . show-paren-mode)
   :init (setq show-paren-when-point-inside-paren t
-	      show-paren-shen-point-in-periphery t)
-
-  )
-
+	      show-paren-shen-point-in-periphery t))
 
 (use-package symbol-overlay
   :diminish

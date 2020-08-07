@@ -146,7 +146,8 @@
       :init
       (when (executable-find "python3")
         (setq lsp-python-ms-python-executable-cmd "python3")
-        (setq-default python-shell-interpreter "python3")))
+        (setq-default python-shell-interpreter "python3")
+        (setq python-indent-guess-indent-offset nil)))
 
     (use-package lsp-java
       :defer t
