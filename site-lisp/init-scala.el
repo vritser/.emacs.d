@@ -66,9 +66,18 @@
    'self-insert-command
    minibuffer-local-completion-map)
    ;; sbt-supershell kills sbt-mode:  https://github.com/hvesalai/emacs-sbt-mode/issues/152
-   (setq sbt:program-options '("-Dsbt.supershell=false" "-Dmetals.client=emacs")))
+  (setq sbt:program-options '("-Dsbt.supershell=false")
+        sbt:display-command-buffer nil))
 
 (use-package lsp-metals)
+
+(defun compile-sbt-proj ()
+  "Compile the sbt project."
+  (sbt-command "test:compile"))
+
+(add-hook 'scala-mode-hook
+          (lambda ()
+            (add-hook 'after-save-hook 'compile-sbt-proj)))
 
 
 (provide 'init-scala)
