@@ -141,5 +141,16 @@ point reaches the beginning or end of the buffer, stop there."
 
 ;; (test-posframe-tip "string")
 
+
+
+;; (defun vr (&rest args)
+;;   (print args))
+
+;; (vr
+;;  :bind (("C" . 'next-line)
+;;         :map ("A" . 'previous-line))
+;;  :hook '(1 2 3))
+
+
 (provide 'init-funcs)
 ;;; init-funcs.el ends here

@@ -72,8 +72,9 @@
     (define-key xah-fly-key-map (kbd "C-o") 'counsel-find-file)
     (define-key xah-fly-key-map (kbd "a") 'counsel-M-x)
     (define-key xah-fly-key-map (kbd "b") 'swiper-isearch-thing-at-point)
-    (define-key xah-fly-key-map (kbd "r") 'forward-symbol)
-    (define-key xah-fly-key-map (kbd "g") (lambda () (interactive) (forward-symbol -1))))
+    ;; (define-key xah-fly-key-map (kbd "r") 'forward-symbol)
+    ;; (define-key xah-fly-key-map (kbd "g") (lambda () (interactive) (forward-symbol -1)))
+    )
 
 
   :hook ((xah-fly-insert-mode-activate . v-fly-insert-map-hook)
