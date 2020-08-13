@@ -25,7 +25,7 @@
 ;;; Code:
 
 (use-package doom-themes
-    :init (load-theme 'doom-one))
+  :init (load-theme 'doom-one))
 
 (use-package all-the-icons
   ;; :ensure t

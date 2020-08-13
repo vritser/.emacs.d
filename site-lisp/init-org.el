@@ -222,7 +222,7 @@
                   ("p" "Protocol" entry (file+headline "~/org/notes.org" "Inbox")
                    "* [[%:link][%:description]] \n\n%u \n\n%i\n%?\n")
 	                ("L" "Protocol Link" entry (file+headline "~/org/notes.org" "Inbox")
-                   "* %? [[%:link][%:description]] \nCaptured On: %U")))
+                   "* %?[[%:link][%:description]] \nCaptured On: %U\n")))
 
   )
 

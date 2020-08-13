@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: variable
+# key: v
+# --
+
+const $1 :$2 = ${2:$(if (string= "string" yas-text) (char-to-string 34))}$3${2:$(if (string= "string" yas-text) (char-to-string 34))};
