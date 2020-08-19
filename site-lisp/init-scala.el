@@ -57,7 +57,7 @@
   :mode "\\.s\\(cala\\|bt\\)$")
 
 (use-package sbt-mode
-  :commands sbt-start sbt-command
+  :commands (sbt-start sbt-command)
   :config
   ;; WORKAROUND: https://github.com/ensime/emacs-sbt-mode/issues/31
   ;; allows using SPACE when in the minibuffer
@@ -77,7 +77,9 @@
 
 (add-hook 'scala-mode-hook
           (lambda ()
-            (add-hook 'after-save-hook 'compile-sbt-proj)))
+            (add-hook 'after-save-hook (lambda ()
+                                         (when (equal major-mode "scala-mode")
+                                           (compile-sbt-proj))))))
 
 
 (provide 'init-scala)
