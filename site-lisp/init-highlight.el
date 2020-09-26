@@ -24,6 +24,7 @@
 
 ;;; Code:
 
+(setq beacon-color "#eb3594")
 (use-package hl-line
   :ensure nil
   :custom-face (hl-line ((t (:extend t))))

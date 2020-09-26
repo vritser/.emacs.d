@@ -142,6 +142,14 @@ point reaches the beginning or end of the buffer, stop there."
 ;; (test-posframe-tip "string")
 
 
+(defun org-haskell-highlight ()
+  "Replace empty src block to haskell."
+(interactive)
+(save-excursion
+  (goto-char (point-min))
+  (while (re-search-forward "\\(#\\+begin_src\\) $" nil t)
+    (message (match-string 1))
+    (replace-match (concat (match-string 1) " haskell")))))
 
 ;; (defun vr (&rest args)
 ;;   (print args))
