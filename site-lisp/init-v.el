@@ -116,6 +116,8 @@
 
 (defalias 'fmt 'lsp-format-buffer)
 (defalias 'lml 'list-matching-lines)
+(defalias 'rg 'counsel-rg)
+
 
 ;; Keybindings
 (global-set-key (kbd "M-i") 'beginning-of-defun)

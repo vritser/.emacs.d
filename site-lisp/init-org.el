@@ -110,7 +110,8 @@
   ;; Babel
   (setq org-confirm-babel-evaluate nil
         org-src-fontify-natively t
-        org-src-tab-acts-natively t)
+        org-src-tab-acts-natively t
+        org-babel-python-command "python3")
 
   (defvar load-language-list '((emacs-lisp . t)
                                (python . t)

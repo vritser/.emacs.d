@@ -84,5 +84,10 @@
                 (reusable-frames . visible)
                 (window-height . 0.5)))
 
+
+(setq socks-noproxy '("localhost"))
+(require 'socks)
+(setq erc-server-connect-function 'socks-open-network-stream)
+(setq socks-server (list "My socks server" "127.0.0.1" 1086 5))
 (provide 'init-tools)
 ;;; init-tools.el ends here
