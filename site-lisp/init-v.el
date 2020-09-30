@@ -74,12 +74,14 @@
   (newline-and-indent))
 
 (defun v-down-2-lines ()
+  "Jump out curly."
   (interactive)
-  (next-line)
+  (forward-line)
   (move-end-of-line nil)
   (newline-and-indent))
 
 (defun v-open-line-indent ()
+  "Open line then indent."
   (interactive)
   (if (looking-at ".+")
       (progn
@@ -89,8 +91,7 @@
     (save-excursion
       (newline)))
 
-  (indent-according-to-mode)
-  )
+  (indent-according-to-mode))
 
 (defun v-backward-paragraph ()
   "Move backward to  beginning of paragraph."
