@@ -159,6 +159,48 @@ point reaches the beginning or end of the buffer, stop there."
 ;;         :map ("A" . 'previous-line))
 ;;  :hook '(1 2 3))
 
+;; Customize { in scala mode
+(defun awesome-pair-open-curly ()
+  (interactive)
+  (cond
+   ((region-active-p)
+    (awesome-pair-wrap-curly))
+   ((and (awesome-pair-in-string-p)
+         (derived-mode-p 'js-mode))
+    (insert "{}")
+    (backward-char))
+   ((or (awesome-pair-in-string-p)
+        (awesome-pair-in-comment-p))
+    (insert "{"))
+   (t
+    (cond ((derived-mode-p 'ruby-mode)
+           (insert "{  }")
+           (backward-char 2))
+
+          ((derived-mode-p 'scala-mode)
+           ;; (if (re-search-backward ".*\\(map\\|Map\\|foreach\\)\s?$" (line-beginning-position) t)
+           (if (re-search-backward (rx (zero-or-more alpha)
+                                       (or "map" "foreach")
+                                       (zero-or-more space)
+                                       eol)
+                                    (line-beginning-position) t)
+               (progn
+                 (end-of-line)
+                 (when (not (equal (string (preceding-char)) " "))
+                   (insert " "))
+                 (insert "{")
+                 (yas-expand))
+             (progn
+               (insert "{}")
+               (backward-char 1))
+             ))
+
+          (t
+           (insert "{}")
+           (backward-char)))
+    )
+   ))
+
 
 (provide 'init-funcs)
 ;;; init-funcs.el ends here
