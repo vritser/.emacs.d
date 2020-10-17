@@ -28,12 +28,12 @@
 
 ;;; Code:
 
-(use-package plantuml-mode
-  :defer t
-  :init
-  (setq plantuml-default-exec-mode 'jar
-        org-plantuml-jar-path "~/tools/plantuml.jar"
-        plantuml-jar-path "~/tools/plantuml.jar"))
+;; (use-package plantuml-mode
+;;   :defer t
+;;   :init
+;;   (setq plantuml-default-exec-mode 'jar
+;;         org-plantuml-jar-path "~/tools/plantuml.jar"
+;;         plantuml-jar-path "~/tools/plantuml.jar"))
 
 (use-package restclient
   :mode ("\\.http\\'" . restclient-mode)
@@ -85,9 +85,14 @@
                 (window-height . 0.5)))
 
 
-(setq socks-noproxy '("localhost"))
-(require 'socks)
-(setq erc-server-connect-function 'socks-open-network-stream)
-(setq socks-server (list "My socks server" "127.0.0.1" 1086 5))
+(use-package visual-regexp)
+
+;; erc proxy
+;; (setq socks-noproxy '("localhost"))
+;; (require 'socks)
+;; (setq erc-server-connect-function 'socks-open-network-stream)
+;; (setq socks-server (list "My socks server" "127.0.0.1" 1086 5))
+
+
 (provide 'init-tools)
 ;;; init-tools.el ends here

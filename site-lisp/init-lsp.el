@@ -102,7 +102,7 @@
 
     :init (setq lsp-ui-doc-enable nil
                 lsp-ui-doc-use-webkit nil
-		            lsp-ui-doc-delay 0.2
+		            lsp-ui-doc-delay 1
                 lsp-ui-doc-include-signature t
 		            lsp-ui-doc-position 'at-point
                 lsp-ui-doc-border (face-foreground 'default)
