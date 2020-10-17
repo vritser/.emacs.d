@@ -38,6 +38,7 @@
 (require 'init-base)
 (require 'init-dashboard)
 
+(require 'init-tools)
 (require 'init-funcs)
 (require 'init-xah-fly-keys)
 (require 'init-thing-edit)
@@ -59,8 +60,8 @@
 (require 'init-web)
 (require 'init-scala)
 (require 'init-org)
-(require 'init-tools)
 (require 'init-flycheck)
+(require 'grep-dired)
 
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)

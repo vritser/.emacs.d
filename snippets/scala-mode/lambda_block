@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: lambda block
+# key: {
+# --
+
+{ ${1:_} =>
+  $0
+}
