@@ -47,6 +47,7 @@
     (key-chord-define xah-fly-insert-map "th" 'xah-fly-command-mode-activate)
     (global-set-key (kbd "<escape>") 'xah-fly-command-mode-activate))
 
+  (define-key xah-fly-t-keymap (kbd "p") 'vr/replace)
   ;; projectile key map
   (define-prefix-command 'v-l-map)
   (define-key v-l-map (kbd "f") 'projectile-find-file)
@@ -61,7 +62,7 @@
     (define-key xah-fly-key-map (kbd "M-h") 'v-down-2-lines)
     (define-key xah-fly-key-map (kbd "C-n") 'next-line)
     (define-key xah-fly-key-map (kbd "C-a") 'beginning-of-line)
-    (define-key xah-fly-key-map (kbd "g") nil)
+    ;; (define-key xah-fly-key-map (kbd "g") nil)
     ;; (define-key xah-fly-key-map (kbd "SPC-u") nil)
 
     (define-key xah-fly-insert-map (kbd "<backspace>") 'hungry-delete-backward))
@@ -71,7 +72,9 @@
     ;; (define-key xah-fly-key-map (kbd "SPC u") 'projectile-switch-to-buffer)
     (define-key xah-fly-key-map (kbd "C-o") 'counsel-find-file)
     (define-key xah-fly-key-map (kbd "a") 'counsel-M-x)
-    (define-key xah-fly-key-map (kbd "b") 'swiper-isearch-thing-at-point)
+    (define-key xah-fly-key-map (kbd "C-a") 'beginning-of-line)
+    (define-key xah-fly-key-map (kbd "b") 'swiper)
+    (define-key xah-fly-key-map (kbd "p") 'vr/query-replace)
     ;; (define-key xah-fly-key-map (kbd "r") 'forward-symbol)
     ;; (define-key xah-fly-key-map (kbd "g") (lambda () (interactive) (forward-symbol -1)))
     )

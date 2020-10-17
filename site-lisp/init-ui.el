@@ -118,7 +118,7 @@
   (doom-modeline-major-mode-icon t)
   :config
   (setq doom-modeline-buffer-file-name-style 'file-name
-        doom-modeline-height 10
+        doom-modeline-height 8
         doom-modeline-project-detection 'projectile
         doom-modeline-minor-modes nil))
 

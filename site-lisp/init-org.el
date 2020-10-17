@@ -127,6 +127,9 @@
   ;; (use-package ob-go
   ;;   :init (cl-pushnew '(go . t) load-language-list))
 
+  (use-package ob-restclient
+    :init (cl-pushnew '(restclient . t) load-language-list))
+
   ;; (use-package ob-rust
   ;;   :init (cl-pushnew '(rust . t) load-language-list))
 
