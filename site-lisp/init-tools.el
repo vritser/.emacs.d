@@ -91,6 +91,7 @@
 ;; (setq socks-noproxy '("localhost"))
 ;; (require 'socks)
 ;; (setq erc-server-connect-function 'socks-open-network-stream)
+;; (setq url-gateway-method 'socks)
 ;; (setq socks-server (list "My socks server" "127.0.0.1" 1086 5))
 
 

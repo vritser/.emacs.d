@@ -145,8 +145,8 @@
 (define-key awesome-pair-mode-map (kbd "M-)") 'awesome-pair-unwrap)
 
 (define-key awesome-pair-mode-map (kbd "M-p") 'v-jump-pair-right)
-(define-key awesome-pair-mode-map (kbd "M-n") 'awesome-pair-jump-left)
-(define-key awesome-pair-mode-map (kbd "M-:") 'awesome-pair-jump-out-pair-and-newline)
+;; (define-key awesome-pair-mode-map (kbd "M-n") 'awesome-pair-jump-left)
+;; (define-key awesome-pair-mode-map (kbd "M-:") 'awesome-pair-jump-out-pair-and-newline)
 
 
 (provide 'init-awesome-pair)

@@ -111,6 +111,8 @@
                     :height 180
                     :weight 'bold)
 
+(set-frame-parameter (selected-frame) 'alpha (list 100 100))
+
 (use-package doom-modeline
   :hook (after-init . doom-modeline-mode)
   :custom

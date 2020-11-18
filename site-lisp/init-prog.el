@@ -30,14 +30,14 @@
   :init
   (setq-default prettify-symbols-alist
 		'(("lambda" . ?λ)
-                  ("<-" . ?←)
-                  ("->" . ?→)
-                  ("=>" . ?⇒)
-                  ("/=" . ?≠)
-                  ("!=" . ?≠)
-                  ("==" . ?≡)
-                  ("<=" . ?≤)
-                  (">=" . ?≥)))
+      ("<-" . ?←)
+      ("->" . ?→)
+      ("=>" . ?⇒)
+      ("/=" . ?≠)
+      ("!=" . ?≠)
+      ("==" . ?≡)
+      ("<=" . ?≤)
+      (">=" . ?≥)))
   (setq-default prettify-symbols-unprettify-at-point 'right-edge))
 
 
