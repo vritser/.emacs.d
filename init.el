@@ -46,6 +46,7 @@
 (require 'init-ui)
 (require 'init-v)
 
+;(require 'restclient)
 (require 'init-yasnippet)
 (require 'init-awesome-pair)
 (require 'init-elisp)

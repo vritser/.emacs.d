@@ -117,7 +117,8 @@
                                (python . t)
                                (js . t)
                                (java . t)
-                               (plantuml . t)))
+                               (plantuml . t)
+                               (dot . t)))
 
   ;; ob-sh renamed to ob-shell since 26.1.
   ;; (if emacs/>=26p
@@ -127,8 +128,8 @@
   ;; (use-package ob-go
   ;;   :init (cl-pushnew '(go . t) load-language-list))
 
-  (use-package ob-restclient
-    :init (cl-pushnew '(restclient . t) load-language-list))
+  ;; (use-package ob-restclient
+  ;;   :init (cl-pushnew '(restclient . t) load-language-list))
 
   ;; (use-package ob-rust
   ;;   :init (cl-pushnew '(rust . t) load-language-list))
