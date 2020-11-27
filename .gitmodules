@@ -7,15 +7,3 @@
 [submodule "site-lisp/extensions/snails"]
 	path = site-lisp/extensions/snails
 	url = https://github.com/manateelazycat/snails.git
-[submodule "site-lisp/extensions/nox"]
-	path = site-lisp/extensions/nox
-	url = https://github.com/manateelazycat/nox.git
-[submodule "aweshell"]
-	path = aweshell
-	url = https://github.com/manateelazycat/aweshell.git
-[submodule "site-lisp/extensions/aweshell"]
-	path = site-lisp/extensions/aweshell
-	url = https://github.com/manateelazycat/aweshell.git
-[submodule "site-lisp/extensions/grep-dired"]
-	path = site-lisp/extensions/grep-dired
-	url = https://github.com/manateelazycat/grep-dired.git

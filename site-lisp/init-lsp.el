@@ -55,6 +55,8 @@
         lsp-eldoc-render-all nil
         ;; lsp-signature-doc-lines 2
         lsp-modeline-code-actions-enable nil
+        lsp-eslint-enable t
+        lsp-eslint-run "onSave"
 
         lsp-enable-file-watchers nil
         lsp-enable-file-watchers nil
