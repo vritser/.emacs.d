@@ -25,6 +25,8 @@
 ;;; Requires:
 
 (require 'init-const)
+(require 'restclient)
+(require 'navicat)
 
 ;;; Code:
 
@@ -35,17 +37,29 @@
 ;;         org-plantuml-jar-path "~/tools/plantuml.jar"
 ;;         plantuml-jar-path "~/tools/plantuml.jar"))
 
-(use-package restclient
-  :mode ("\\.http\\'" . restclient-mode)
-  :config
-  (use-package restclient-test
-    :diminish
-    :hook (restclient-mode . restclient-test-mode))
+(with-eval-after-load 'restclient
+  (add-to-list 'auto-mode-alist '("\\.http\\'" . restclient-mode)))
 
-  (with-eval-after-load 'company
-    (use-package company-restclient
-      :defines company-backends
-      :init (add-to-list 'company-backends 'company-restclient))))
+(with-eval-after-load 'navicat
+  (add-to-list 'auto-mode-alist '("\\.nav\\'" . navicat-mode))
+  (add-hook 'navicat-mode-hook 'sqlup-mode)
+  (setq navicat-db-host "47.94.37.100"
+        navicat-db-port "20617"
+        navicat-db-user "root"
+        navicat-db-passwd "qweQWE!@#"))
+
+;; (use-package restclient
+  ;; :mode ("\\.http\\'" . restclient-mode)
+;;   :config
+;;   (use-package restclient-test
+;;     :diminish
+;;     :hook (restclient-mode . restclient-test-mode))
+
+;;   (with-eval-after-load 'company
+;;     (use-package company-restclient
+;;       :defines company-backends
+  ;;       :init (add-to-list 'company-backends 'company-restclient)))
+  ;; )
 
 (use-package youdao-dictionary
   :commands youdao-dictionary-play-voice-of-current-word
