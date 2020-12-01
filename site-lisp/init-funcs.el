@@ -51,12 +51,13 @@ point reaches the beginning or end of the buffer, stop there."
   (interactive)
   (find-file "~/.emacs.d/init.el"))
 
+(defalias 'zsh (lambda () (interactive) (find-file "~/.zshrc")))
+
 (defun publish-hugo-posts-to-github-pages ()
   "Auto publish to github pages."
   (interactive)
   (org-hugo-export-wim-to-md t nil nil)
   (async-shell-command "sh ~/org/deploy.sh"))
-
 (defalias 'hp 'publish-hugo-posts-to-github-pages)
 
 (defun my-dired-find-file ()
@@ -151,6 +152,88 @@ point reaches the beginning or end of the buffer, stop there."
     (message (match-string 1))
     (replace-match (concat (match-string 1) " haskell")))))
 
+(defun v-jump-to-http ()
+  "Jump to related http file."
+  (interactive)
+  (when (string-suffix-p ".ts" (buffer-name))
+    (xref-push-marker-stack)
+    (let* ((name (replace-regexp-in-string (rx (zero-or-one (or "Svc" "Ctrl")) ".ts" eol) "" (buffer-name)))
+           (http (concat name ".http")))
+      (if (buffer-live-p (get-buffer http))
+          (switch-to-buffer http)
+        (find-file (f-join default-directory http))))))
+(global-set-key (kbd "C-c j") 'v-jump-to-http)
+
+;; (defun v-read ()
+;;   (interactive)
+;;   (read (current-buffer)))
+;; (global-set-key (kbd "s-1") 'v-read)
+
+
+;; Network Proxy
+(defun proxy-http-show ()
+  "Show HTTP/HTTPS proxy."
+  (interactive)
+  (if url-proxy-services
+      (message "Current HTTP proxy is `%s'" centaur-proxy)
+    (message "No HTTP proxy")))
+
+(defun proxy-http-enable ()
+  "Enable HTTP/HTTPS proxy."
+  (interactive)
+  (setq url-proxy-services
+        `(("http" . ,centaur-proxy)
+          ("https" . ,centaur-proxy)
+          ("no_proxy" . "^\\(localhost\\|192.168.*\\|10.*\\)")))
+  (proxy-http-show))
+
+(defun proxy-http-disable ()
+  "Disable HTTP/HTTPS proxy."
+  (interactive)
+  (setq url-proxy-services nil)
+  (proxy-http-show))
+
+(defun proxy-http-toggle ()
+  "Toggle HTTP/HTTPS proxy."
+  (interactive)
+  (if (bound-and-true-p url-proxy-services)
+      (proxy-http-disable)
+    (proxy-http-enable)))
+
+(defun proxy-socks-show ()
+  "Show SOCKS proxy."
+  (interactive)
+  (when (fboundp 'cadddr)                ; defined 25.2+
+    (if (bound-and-true-p socks-noproxy)
+        (message "Current SOCKS%d proxy is %s:%d"
+                 (cadddr socks-server) (cadr socks-server) (caddr socks-server))
+      (message "No SOCKS proxy"))))
+
+(defun proxy-socks-enable ()
+  "Enable SOCKS proxy."
+  (interactive)
+  (require 'socks)
+  (setq url-gateway-method 'socks
+        socks-noproxy '("localhost")
+        socks-server '("Default server" "127.0.0.1" 1086 5))
+  (proxy-socks-show))
+
+(defun proxy-socks-disable ()
+  "Disable SOCKS proxy."
+  (interactive)
+  (setq url-gateway-method 'native
+        socks-noproxy nil)
+  (proxy-socks-show))
+
+(defun proxy-socks-toggle ()
+  "Toggle SOCKS proxy."
+  (interactive)
+  (if (bound-and-true-p socks-noproxy)
+      (proxy-socks-disable)
+    (proxy-socks-enable)))
+
+
+
 ;; (defun vr (&rest args)
 ;;   (print args))
 
@@ -167,14 +250,63 @@ point reaches the beginning or end of the buffer, stop there."
       )
     )
 
-(defun v-jump-to-http ()
-  "Jump to related http file."
-  (interactive)
-  (if (string-suffix-p ".ts" (buffer-name))
-      (let ((name (replace-regexp-in-string (rx (zero-or-one (or "Svc" "Ctrl")) ".ts" eol) "" (buffer-name))))
-        (switch-to-buffer (concat name ".http")))))
-(global-set-key (kbd "C-c j") 'v-jump-to-http)
 
+
+;; (buffer-live-p (get-buffer "test.nav"))
+
+(defun foo () 123)
+(define-advice foo (:around (_oldfun) bar)
+  456)
+;; (foo)
+;; (funcall (advice--cdr (symbol-function 'foo)))
+
+(defun my-shell-execute(cmd)
+   (interactive "sShell command: ")
+   (shell (get-buffer-create "my-shell-buf"))
+   (process-send-string (get-buffer-process "my-shell-buf") (concat cmd "\n")))
+
+(defun open-navicat-file ()
+  "Open project sql query file."
+  (interactive)
+  (find-file "/Users/vritser/company/lezhilong/rd-mytikas/rd-mytikas.nav"))
+
+(defalias 'nav 'open-navicat-file)
+
+;; (read-regexp "input")
+
+;; (setq url-request-extra-headers '(("Content-Type" . "application/json") ("User-Agent" . "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.138 Safari/537.36") ("Authorization" . "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFLOHpCVjhNIiwibW9iaWxlIjoiMTgzOTY4MTY4NzgiLCJpYXQiOjE2MDY0NzExMzksImV4cCI6MTYxMTY1NTEzOX0.vpGC_iRP_25v9vc1ZPNNJeHE_SRvn2jIiH8HoG7cZ5k")))
+
+;; (url-retrieve
+;;  "https://rdmytikasapitest.lezhilong.cn/api/v1/home/user"
+;;  (lambda (events)
+;;    (goto-char url-http-end-of-headers)
+;;    (print (json-read))
+   ;; (let ((json-object-type 'plist)
+   ;;       (json-key-type 'symbol)
+   ;;       (json-array-type 'vector))
+   ;;   (let ((result (json-read)))
+   ;;     ;; Do something with RESULT here
+   ;;     (print result)
+   ;;     ))
+   ;; ))
+
+;; (setq resp '((results (id . "aK8zBV8M") (mobile . "18396816878") (unionid . "oKto1w1PMA0--hxgIesuVpk_ts_0") (nick_name . "vritser") (avatar_file (file_type . "image/png") (file_url . "https://thirdwx.qlogo.cn/mmopen/vi_32/ZY1RUzSxf937TfZeuTeTa4icnC3WuEyBRZGUNkwtL2eo3ymWfaNoBiacMvbWibK4FZEILVQgFtAmiboI8AhRkCl6Zg/132")) (class (id . "neXd2mpO") (semester_id . "xzX47qVY") (version . "2") (trench . "noob") (teacher (nickname . "1839681687") (wxid . "12") (qrcode (file_type . "image/png") (file_url . "https://mytikas-testing.oss-cn-beijing.aliyuncs.com/f5a01230-e8e3-11ea-94a0-7f3a1171388eheader.png?x-oss-process=style/lezhilong"))) (semester (start_date . "2020-11-28") (end_date . "2020-12-02")) (finance (type . 1))) (purchased . t) (registered . :json-false) (exam . :json-false)) (err_code . 0)))
+
+;; (loop for i upto 10 collect i)
+
+;; (loop for i in '(10 20 30 40) collect (* i 2))
+
+;; (loop for (a b) in '((1 2) (3 4) (5 6))
+;;       do (print (+ a b)))
+
+;; (loop for (results code) in resp
+;;       do (print results))
+
+;; (loop for (k . v) in (cdar resp)
+;;       do (message "%s: %s" k v))
+
+;; (assoc 'a '((a (b . e)) (c . d)))
+;; (caadr (assoc 'a '((a (b . e)) (c . d))))
 
 (provide 'init-funcs)
 ;;; init-funcs.el ends here
