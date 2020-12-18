@@ -25,7 +25,7 @@
 ;;; Code:
 
 (defun add-subdirs-to-load-path (dir)
-  "Recursive add dirs to `load-path`."
+  "Recursive add `DIR` to `load-path'."
   (let ((default-directory (file-name-as-directory dir)))
     (add-to-list 'load-path dir)
     (normal-top-level-add-subdirs-to-load-path)))
@@ -48,7 +48,6 @@
 
 (require 'init-yasnippet)
 (require 'init-awesome-pair)
-(require 'init-elisp)
 (require 'init-company)
 (require 'init-go)
 (require 'init-lsp)
@@ -57,11 +56,11 @@
 (require 'init-ivy)
 (require 'init-prog)
 (require 'init-magit)
-(require 'init-web)
+;; (require 'init-web)
+(require 'init-js)
 (require 'init-scala)
 (require 'init-org)
 (require 'init-flycheck)
-(require 'grep-dired)
 
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)

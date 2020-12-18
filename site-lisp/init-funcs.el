@@ -103,52 +103,16 @@ point reaches the beginning or end of the buffer, stop there."
       (insert (concat "export interface I" interface " {\n" body "}")))))
 
 (defun empty-string-p (str)
-  "Return true if STR is empty or nil."
+  "Return true if `STR` is empty or nil."
   (or (null str)
       (zerop (length (string-trim str)))))
-
-
-(define-derived-mode mode org-mode "Youdao-dictionary"
-  "Major mode for viewing Youdao dictionary result.
-\\{youdao-dictionary-mode-map}"
-  (read-only-mode 1)
-  (define-key mode-map "q" 'quit-window))
-
-(defun test-posframe-tip (str)
-  "Show STR using posframe-show."
-  (unless (and (require 'posframe nil t) (posframe-workable-p))
-    (error "Posframe not workable"))
-
-  (let ((word "test"))
-    (if word
-        (progn
-          (with-current-buffer (get-buffer-create "VTEST")
-            (let ((inhibit-read-only t))
-              (erase-buffer)
-              (mode)
-              (insert str)
-              (goto-char (point-min))))
-          (posframe-show "VTEST"
-                         :left-fringe 8
-                         :right-fringe 8
-                         :internal-border-color (face-foreground 'default)
-                         :internal-border-width 1)
-          (unwind-protect
-              (push (read-event) unread-command-events)
-            (progn
-              (posframe-delete "VTEST")
-              (other-frame 0))))
-      (message "Nothing to look up"))))
-
-;; (test-posframe-tip "string")
-
 
 (defun org-haskell-highlight ()
   "Replace empty src block to haskell."
 (interactive)
 (save-excursion
   (goto-char (point-min))
-  (while (re-search-forward "\\(#\\+begin_src\\) $" nil t)
+  (while (re-search-forward "\\(#\\+begin_src\\) *$" nil t)
     (message (match-string 1))
     (replace-match (concat (match-string 1) " haskell")))))
 
@@ -255,6 +219,21 @@ point reaches the beginning or end of the buffer, stop there."
 ;; (buffer-live-p (get-buffer "test.nav"))
 
 (defun foo () 123)
+
+(defun foo-bar (orig &rest args)
+  ""
+  (apply orig args))
+;; (advice-add 'org-capture-kill :around #'foo-bar)
+
+;; (add-to-list 'company-backends '(company-capf :with company-files :separate))
+
+(defun org-capture-advice-add-kill-no-save (&rest args)
+  "为org-capture-kill配置一个补丁，调用前述函数时，读取:kill-no-save，并赋值给:no-save"
+  (if (plist-get org-capture-current-plist :kill-no-save)
+      (setq org-capture-current-plist
+	    (plist-put org-capture-current-plist :no-save (plist-get org-capture-current-plist :kill-no-save)))))
+;; (advice-add #'org-capture-kill :around #'org-capture-advice-add-kill-no-save)
+
 (define-advice foo (:around (_oldfun) bar)
   456)
 ;; (foo)

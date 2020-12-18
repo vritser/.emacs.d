@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: HTTP PUT template
+# key: p
+# --
+
+#
+PUT :host/$1
+:header
+
+{
+    $0
+}

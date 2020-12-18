@@ -29,9 +29,9 @@
   :hook (after-init . projectile-mode)
   :init
   (setq projectile-mode-line-prefix ""
-	projectile-sort-order 'recentf
-	projectile-use-git-grep t
-    projectile-globally-ignored-file-suffixes
+	      projectile-sort-order 'recentf
+	      projectile-use-git-grep t
+        projectile-globally-ignored-file-suffixes
         '(
           "blob"
           "class"
@@ -46,8 +46,8 @@
           "xd"
           "zip"
           )
-    projectile-globally-ignored-files '("TAGS" "*~")
-    )
+        projectile-globally-ignored-files '("TAGS" "*~")
+        )
 
   :config
   (setq projectile-globally-ignored-directories

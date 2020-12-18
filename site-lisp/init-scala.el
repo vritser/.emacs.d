@@ -25,10 +25,6 @@
 ;;; Code:
 
 
-
-
-
-
 ;; Make sure to use coursier v1.1.0-M9 or newer.
 ;; https://get-coursier.io/
 
@@ -50,8 +46,6 @@
 ;;   -r bintray:scalacenter/releases \
 ;;   -r sonatype:snapshots \
 ;;   -o /usr/local/bin/metals-emacs -f
-
-
 
 (use-package scala-mode
   :mode "\\.s\\(cala\\|bt\\)$")
@@ -80,7 +74,6 @@
             (add-hook 'after-save-hook (lambda ()
                                          (when (equal major-mode "scala-mode")
                                            (compile-sbt-proj))))))
-
 
 (provide 'init-scala)
 ;;; init-scala.el ends here

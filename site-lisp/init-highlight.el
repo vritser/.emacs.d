@@ -24,7 +24,7 @@
 
 ;;; Code:
 
-(setq beacon-color "#eb3594")
+;; (setq beacon-color "#eb3594")
 (use-package hl-line
   :ensure nil
   :custom-face (hl-line ((t (:extend t))))
@@ -36,19 +36,19 @@
   :init (setq show-paren-when-point-inside-paren t
 	      show-paren-shen-point-in-periphery t))
 
-(use-package symbol-overlay
-  :diminish
-  :custom-face (symbol-overlay-default-face ((t (:inherit (region bold)))))
-  :init (setq symbol-overlay-idle-time 0.1
-              symbol-overlay-faces
-              '((:inherit (highlight bold))
-                (:inherit (font-lock-builtin-face bold) :inverse-video t)
-                (:inherit (warning bold) :inverse-video t)
-                (:inherit (font-lock-constant-face bold) :inverse-video t)
-                (:inherit (error bold) :inverse-video t)
-                (:inherit (dired-mark bold) :inverse-video t)
-                (:inherit (success bold) :inverse-video t)
-                (:inherit (font-lock-keyword-face bold) :inverse-video t))))
+;; (use-package symbol-overlay
+;;   :diminish
+;;   :custom-face (symbol-overlay-default-face ((t (:inherit (region bold)))))
+;;   :init (setq symbol-overlay-idle-time 0.1
+;;               symbol-overlay-faces
+;;               '((:inherit (highlight bold))
+;;                 (:inherit (font-lock-builtin-face bold) :inverse-video t)
+;;                 (:inherit (warning bold) :inverse-video t)
+;;                 (:inherit (font-lock-constant-face bold) :inverse-video t)
+;;                 (:inherit (error bold) :inverse-video t)
+;;                 (:inherit (dired-mark bold) :inverse-video t)
+;;                 (:inherit (success bold) :inverse-video t)
+;;                 (:inherit (font-lock-keyword-face bold) :inverse-video t))))
 
 
 (use-package highlight-indent-guides
@@ -61,8 +61,12 @@
   :diminish
   :hook (after-init . volatile-highlights-mode))
 
-(use-package pulse
-  :ensure nil)
+
+(use-package paren-face
+  :hook (after-init . global-paren-face-mode))
+
+;; (use-package pulse
+;;   :ensure nil)
 
 
 (provide 'init-highlight)

@@ -2,7 +2,9 @@
 # name: HTTP POST verb template with Content-Type application/json
 # key: p
 # --
-POST $1
+
+#
+POST :host/$1
 :header
 
 {

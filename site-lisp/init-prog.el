@@ -40,15 +40,19 @@
       (">=" . ?≥)))
   (setq-default prettify-symbols-unprettify-at-point 'right-edge))
 
-
-(use-package dockerfile-mode)
+;;
+;; (use-package elisp-mode)
 (use-package lua-mode)
-(use-package csv-mode)
+;; (use-package haskell-mode)
 
-(use-package haskell-mode)
+;;
+;; (use-package csv-mode)
+;; (use-package dockerfile-mode)
+;; (use-package protobuf-mode
+;;   :mode ".proto$")
+;; (use-package docker-compose-mode
+;;   :defer t)
 
-(use-package protobuf-mode
-  :mode ".proto$")
 
 (provide 'init-prog)
 ;;; init-prog.el ends here
