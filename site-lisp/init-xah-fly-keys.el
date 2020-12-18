@@ -52,7 +52,8 @@
 
   ;; projectile key map
   (define-prefix-command 'v-l-map)
-  (define-key v-l-map (kbd "f") 'projectile-find-file)
+  ;; (define-key v-l-map (kbd "f") 'projectile-find-file)
+  (define-key v-l-map (kbd "f") 'counsel-git)
   (define-key v-l-map (kbd "p") 'projectile-switch-project)
   (define-key v-l-map (kbd "u") 'projectile-switch-to-buffer)
 

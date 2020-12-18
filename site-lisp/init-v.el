@@ -155,6 +155,15 @@
 ;; (global-set-key (kbd "C-x p f") 'projectile-find-file)
 ;; (global-set-key (kbd "C-x p b") 'projectile-switch-to-buffer)
 
+
+;; erc proxy
+;; (setq socks-noproxy '("localhost"))
+;; (require 'socks)
+;; (setq erc-server-connect-function 'socks-open-network-stream)
+;; (setq url-gateway-method 'socks)
+;; (setq socks-server (list "My socks server" "127.0.0.1" 1086 5))
+
+
 (provide 'init-v)
 ;;; init-v.el ends here
 ;; (setq comp-async-jobs-number 8)

@@ -48,7 +48,7 @@
 
   :config
   (with-eval-after-load 'projectile
-    (setq projectile-completion-system 'ivy))
+    (setq-default projectile-completion-system 'ivy))
 
   (use-package smex))
 

@@ -64,10 +64,7 @@
 (use-package youdao-dictionary
   :commands youdao-dictionary-play-voice-of-current-word
   :bind (("C-c y" . my-youdao-search-at-point)
-         ("C-c Y" . youdao-dictionary-search-at-point)
-         :map youdao-dictionary-mode-map
-         ("h" . youdao-dictionary-hydra/body)
-         ("?" . youdao-dictionary-hydra/body))
+         ("C-c Y" . youdao-dictionary-search-at-point))
   :init
   (setq url-automatic-caching t
         youdao-dictionary-use-chinese-word-segmentation t) ; 中文分词
@@ -81,33 +78,24 @@
         (youdao-dictionary-search-at-point-tooltip))
       (youdao-dictionary-search-at-point))))
 
-(use-package vterm)
+;; (use-package vterm)
+;; (use-package vterm-toggle
+;;   :bind ("C-`" . vterm-toggle)
+;;   :ensure t)
 
-(use-package vterm-toggle
-  :bind ("C-`" . vterm-toggle)
-  :ensure t)
-
-(setq vterm-toggle-fullscreen-p nil)
-(add-to-list 'display-buffer-alist
-             '((lambda(bufname _) (with-current-buffer bufname (equal major-mode 'vterm-mode)))
-                (display-buffer-reuse-window display-buffer-at-bottom)
-                ;;(display-buffer-reuse-window display-buffer-in-direction)
-                ;;display-buffer-in-direction/direction/dedicated is added in emacs27
-                ;;(direction . bottom)
-                ;;(dedicated . t) ;dedicated is supported in emacs27
-                (reusable-frames . visible)
-                (window-height . 0.5)))
+;; (setq vterm-toggle-fullscreen-p nil)
+;; (add-to-list 'display-buffer-alist
+;;              '((lambda(bufname _) (with-current-buffer bufname (equal major-mode 'vterm-mode)))
+;;                 (display-buffer-reuse-window display-buffer-at-bottom)
+;;                 ;;(display-buffer-reuse-window display-buffer-in-direction)
+;;                 ;;display-buffer-in-direction/direction/dedicated is added in emacs27
+;;                 ;;(direction . bottom)
+;;                 ;;(dedicated . t) ;dedicated is supported in emacs27
+;;                 (reusable-frames . visible)
+;;                 (window-height . 0.5)))
 
 
 (use-package visual-regexp)
-
-;; erc proxy
-;; (setq socks-noproxy '("localhost"))
-;; (require 'socks)
-;; (setq erc-server-connect-function 'socks-open-network-stream)
-;; (setq url-gateway-method 'socks)
-;; (setq socks-server (list "My socks server" "127.0.0.1" 1086 5))
-
 
 (provide 'init-tools)
 ;;; init-tools.el ends here

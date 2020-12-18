@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: HTTP DELETE template
+# key: d
+# --
+
+#
+DELETE :host/$1
+:header
