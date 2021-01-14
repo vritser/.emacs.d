@@ -171,6 +171,12 @@
             ;; JDK, see https://github.com/emacs-lsp/dap-mode/issues/31
             ))
 
+    (use-package lsp-dart
+      :defer t
+      :hook (dart-mode . (lambda () (require 'lsp-dart)))
+      :config
+      (setq lsp-dart-sdk-dir "/usr/local/flutter/bin/cache/dart-sdk"))
+
     (use-package dap-java
       :ensure nil
       :after (lsp-java)
@@ -194,16 +200,9 @@
   :config
   (dap-ui-mode t)
   (tooltip-mode 1)
-  (dap-tooltip-mode 1)
+  (dap-tooltip-mode 1))
 
-  (dap-register-debug-template
-   "localhost:5005"
-   (list :type "java"
-         :request "attach"
-         :hostName "localhost"
-         :port 5005))
-  )
-
+;; (setq lsp-java-jdt-download-url "http://localhost:3000/")
 
 (provide 'init-lsp)
 ;;; init-lsp.el ends here

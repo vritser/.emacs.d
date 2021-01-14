@@ -244,6 +244,11 @@ point reaches the beginning or end of the buffer, stop there."
    (shell (get-buffer-create "my-shell-buf"))
    (process-send-string (get-buffer-process "my-shell-buf") (concat cmd "\n")))
 
+(defun replace-md-sub ()
+  "Replace <sub> tag to _ in markdown."
+  (interactive)
+  (replace-regexp "<sub>\\(\\w+\\)</sub>" "_\\1"))
+
 (defun open-navicat-file ()
   "Open project sql query file."
   (interactive)

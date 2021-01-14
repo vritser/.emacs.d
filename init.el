@@ -38,10 +38,10 @@
 (require 'init-base)
 (require 'init-dashboard)
 
+(require 'init-thing-edit)
 (require 'init-tools)
 (require 'init-funcs)
 (require 'init-xah-fly-keys)
-(require 'init-thing-edit)
 (require 'init-projectile)
 (require 'init-ui)
 (require 'init-v)
@@ -61,6 +61,7 @@
 (require 'init-scala)
 (require 'init-org)
 (require 'init-flycheck)
+(require 'init-elfeed)
 
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
