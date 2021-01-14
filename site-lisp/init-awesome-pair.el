@@ -58,6 +58,7 @@
                'minibuffer-inactive-mode-hook
                'typescript-mode-hook
                'restclient-mode-hook
+               'dart-mode-hook
                ))
   (add-hook hook '(lambda () (awesome-pair-mode 1))))
 
