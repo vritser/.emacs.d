@@ -177,6 +177,9 @@
       :config
       (setq lsp-dart-sdk-dir "/usr/local/flutter/bin/cache/dart-sdk"))
 
+    ;; https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-debug
+    ;; version
+    ;; curl https://marketplace.visualstudio.com/_apis/public/gallery/publishers/vscjava/vsextensions/vscode-java-debug/0.35.0/vspackage  > ~/.emacs.d/.cache/lsp/eclipse.jdt.ls/bundles/java.debug.plugin.jar
     (use-package dap-java
       :ensure nil
       :after (lsp-java)
@@ -186,7 +189,7 @@
       (global-set-key (kbd "<f9>") 'dap-continue))
     ))
 
-(add-hook 'java-mode-hook (lambda () (gradle-mode 1)))
+;; (add-hook 'java-mode-hook (lambda () (gradle-mode 1)))
 
 (use-package dap-mode
   :defer t
@@ -200,7 +203,8 @@
   :config
   (dap-ui-mode t)
   (tooltip-mode 1)
-  (dap-tooltip-mode 1))
+  (dap-tooltip-mode 1)
+  (setq dap-python-executable "python3"))
 
 ;; (setq lsp-java-jdt-download-url "http://localhost:3000/")
 
