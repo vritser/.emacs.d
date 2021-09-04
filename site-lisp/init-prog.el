@@ -35,7 +35,7 @@
 
 (use-package prog-mode
   :ensure nil
-  :hook (prog-mode . prettify-symbols-mode)
+  :hook (prog-mode . (lambda () (setq-local default-text-properties '(line-spacing 0.20 line-height 1.20))))
   :init
   (setq-default prettify-symbols-unprettify-at-point 'right-edge))
 
