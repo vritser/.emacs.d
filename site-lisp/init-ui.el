@@ -107,7 +107,7 @@
 ;; (add-hook 'compilation-filter-hook
           ;; (lambda () (ansi-color-apply-on-region (point-min) (point-max))))
 
-(setq-default default-text-properties '(line-spacing 0.20 line-height 1.20))
+;; (setq-default default-text-properties '(line-spacing 0.20 line-height 1.20))
 (set-face-attribute 'font-lock-function-name-face nil
                     :height 180
                     :weight 'bold)
