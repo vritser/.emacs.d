@@ -24,20 +24,19 @@
 
 ;;; Code:
 
+;; https://github.com/tonsky/FiraCode
+;; brew tap homebrew/cask-fonts
+;; brew install --cask font-fira-code
+;; https://github.com/jming422/fira-code-mode
+;; Install the =Fira Code Symbol= font to your system with =M-x fira-code-mode-install-fonts RET=
+(use-package fira-code-mode
+  :custom (fira-code-mode-disabled-ligatures '("[]" "#{" "#(" "#_" "#_(" "x"))
+  :hook prog-mode)
+
 (use-package prog-mode
   :ensure nil
   :hook (prog-mode . prettify-symbols-mode)
   :init
-  (setq-default prettify-symbols-alist
-		'(("lambda" . ?λ)
-      ("<-" . ?←)
-      ("->" . ?→)
-      ("=>" . ?⇒)
-      ("/=" . ?≠)
-      ("!=" . ?≠)
-      ("==" . ?≡)
-      ("<=" . ?≤)
-      (">=" . ?≥)))
   (setq-default prettify-symbols-unprettify-at-point 'right-edge))
 
 ;;
