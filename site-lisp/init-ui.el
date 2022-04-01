@@ -27,6 +27,9 @@
 (use-package doom-themes
   :init (load-theme 'doom-one))
 
+;; (use-package nano-theme
+;;   :init (load-theme 'nano-dark))
+
 (use-package all-the-icons
   ;; :ensure t
   :if (display-graphic-p)
