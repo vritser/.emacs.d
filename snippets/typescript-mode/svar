@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: suffix variable
+# key: var
+# --
+
+const `(vritser/extract-var)` = $1

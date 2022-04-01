@@ -108,16 +108,16 @@
 (use-package gnu-elpa-keyring-update)
 
 ;; Initialization benchmark
-(when centaur-benchmark
-  (use-package benchmark-init
-    :ensure t
-    :defines swiper-font-lock-exclude
-    ;; :commands (benchmark-init/activate)
-    :hook (after-init . benchmark-init/deactivate)
-    :init (benchmark-init/activate)
-    :config
-    (with-eval-after-load 'swiper
-      (add-to-list 'swiper-font-lock-exclude 'benchmark-init/tree-mode))))
+;; (when centaur-benchmark
+;;   (use-package benchmark-init
+;;     :ensure t
+;;     :defines swiper-font-lock-exclude
+;;     ;; :commands (benchmark-init/activate)
+;;     :hook (after-init . benchmark-init/deactivate)
+;;     :init (benchmark-init/activate)
+;;     :config
+;;     (with-eval-after-load 'swiper
+;;       (add-to-list 'swiper-font-lock-exclude 'benchmark-init/tree-mode))))
 
 ;; A modern Packages Menu
 (use-package paradox

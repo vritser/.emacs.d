@@ -80,6 +80,7 @@
         org-ellipsis (if (char-displayable-p ?) "  " nil)
         org-pretty-entities nil
         org-hide-emphasis-markers nil
+        org-edit-src-content-indentation 0
         org-src-tab-acts-natively t
         org-agenda-files '("~/org"))
 

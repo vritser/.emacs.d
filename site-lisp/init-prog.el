@@ -52,6 +52,10 @@
 ;; (use-package docker-compose-mode
 ;;   :defer t)
 
+(use-package subword
+  :ensure nil
+  :bind (("M-r" . subword-forward))
+  :commands (subword-forward subword-backward))
 
 (provide 'init-prog)
 ;;; init-prog.el ends here

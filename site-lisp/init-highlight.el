@@ -63,6 +63,7 @@
 
 
 (use-package paren-face
+  :init (setq paren-face-regexp "[][(){}]")
   :hook (after-init . global-paren-face-mode))
 
 ;; (use-package pulse

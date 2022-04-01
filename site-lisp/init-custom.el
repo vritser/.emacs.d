@@ -95,7 +95,7 @@ If Non-nil, use dashboard, otherwise will restore previous session."
           (const :tag "eglot" 'eglot)
           nil))
 
-(defcustom centaur-lsp-format-on-save-ignore-modes '(c-mode c++-mode)
+(defcustom centaur-lsp-format-on-save-ignore-modes '(c-mode c++-mode typescript-mode java-mode)
   "The modes that don't auto format and organize imports whilesaving the buffers."
   :group 'centaur
   :type 'list)

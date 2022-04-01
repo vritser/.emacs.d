@@ -60,7 +60,7 @@
                'restclient-mode-hook
                'dart-mode-hook
                ))
-  (add-hook hook '(lambda () (awesome-pair-mode 1))))
+  (add-hook hook '(lambda () (awesome-pair-mode t))))
 
 
 (defun v-jump-pair-right ()

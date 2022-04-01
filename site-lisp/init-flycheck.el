@@ -48,10 +48,10 @@
               flycheck-check-syntax-automatically '(save mode-enabled))
   :config
   ;; Prettify indication styles
-  (when (fboundp 'define-fringe-bitmap)
-    (define-fringe-bitmap 'flycheck-fringe-bitmap-arrow
-      [16 48 112 240 112 48 16] nil nil 'center))
-  (flycheck-redefine-standard-error-levels "⏴" 'flycheck-fringe-bitmap-arrow)
+  ;; (when (fboundp 'define-fringe-bitmap)
+  ;;   (define-fringe-bitmap 'flycheck-fringe-bitmap-arrow
+  ;;     [16 48 112 240 112 48 16] nil nil 'center))
+  ;; (flycheck-redefine-standard-error-levels "⏴" 'flycheck-fringe-bitmap-arrow)
 
   ;; Display Flycheck errors in GUI tooltips
   ;; (if (display-graphic-p)
