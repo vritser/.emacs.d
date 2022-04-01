@@ -161,7 +161,7 @@
              "-Xmx1G"
              "-XX:+UseG1GC"
              "-XX:+UseStringDeduplication"
-             ;; "-javaagent:/home/torstein/.m2/repository/org/projectlombok/lombok/1.18.6/lombok-1.18.6.jar"
+             ;; "-javaagent:/Users/pi/.m2/repository/org/projectlombok/lombok/1.18.16/lombok-1.18.16.jar"
              )
 
             ;; Don't organise imports on save
@@ -202,9 +202,9 @@
          (python-mode . (lambda () (require 'dap-python))))
   :config
   (dap-ui-mode t)
-  (tooltip-mode 1)
-  (dap-tooltip-mode 1)
-  (setq dap-python-executable "python3"))
+  (tooltip-mode t)
+  (dap-tooltip-mode t)
+  (setq-default dap-python-executable "python3"))
 
 ;; (setq lsp-java-jdt-download-url "http://localhost:3000/")
 

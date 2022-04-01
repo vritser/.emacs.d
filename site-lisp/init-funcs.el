@@ -128,11 +128,48 @@ point reaches the beginning or end of the buffer, stop there."
         (find-file (f-join default-directory http))))))
 (global-set-key (kbd "C-c j") 'v-jump-to-http)
 
+;; (defun v-transpose-line-up ()
+;;   (interactive)
+;;   (call-interactively 'transpose-lines)
+;;   (forward-line -2)
+;;   (end-of-line))
+
+;; (defun v-transpose-line-down ()
+;;   (interactive)
+;;   (let ((current-prefix-arg '(-1)))
+;;     (call-interactively 'transpose-lines)
+;;     ;; (next-line -2)
+;;     (end-of-line)))
+;; (global-set-key (kbd "M-<up>") 'v-transpose-line-up)
+;; (global-set-key (kbd "M-<down>") 'v-transpose-line-down)
+
 ;; (defun v-read ()
 ;;   (interactive)
 ;;   (read (current-buffer)))
 ;; (global-set-key (kbd "s-1") 'v-read)
 
+;;
+;; Convert parameters to destructured object
+;;
+(defun to_dest_obj ()
+  "Convert parameters to destructured object."
+  (interactive)
+  (let* ((beg (progn
+                (backward-up-list)
+                (forward-char 1)
+                (point)))
+         (end (progn
+                (up-list)
+                (forward-char -1)
+                (point)
+                ))
+         (params (buffer-substring beg end)))
+    (goto-char beg)
+    (delete-char (- end beg))
+    (insert (format "{ %s }: { %s }"
+                    (string-join (mapcar (lambda (s) (string-trim (car (split-string s ":")))) (split-string params ",")) ", ")
+                    params
+                    ))))
 
 ;; Network Proxy
 (defun proxy-http-show ()
@@ -291,6 +328,49 @@ point reaches the beginning or end of the buffer, stop there."
 
 ;; (assoc 'a '((a (b . e)) (c . d)))
 ;; (caadr (assoc 'a '((a (b . e)) (c . d))))
+
+
+;; "https://api.github.com/orgs/emacs-eaf/repos"
+
+;; (require 'request)
+
+;; (switch-to-buffer (url-retrieve-synchronously
+;;  "https://api.github.com/users/vritser"))
+
+;; (request "https://api.github.com/orgs/emacs-eaf/repos"
+;;   :parser 'json-read
+;;   :success (cl-function
+;;             (lambda (&key data &allow-other-keys)
+;;               (message data))))
+
+;; (url-retrieve
+;;  "https://api.github.com/users/vritser"
+;;  (lambda (status)
+;;    (goto-char url-http-end-of-headers)
+;;    (print ())
+;;    (let ((json-object-type 'plist)
+;;          (json-key-type 'string)
+;;          (json-array-type 'vector))
+;;      (let ((result (json-read)))
+;;        ;; Do something with RESULT here
+;;        (print result)
+;;        ))
+;;    ) nil 'silent)
+
+
+;; (defun repeat (s n)
+;;   (unless (= n 0)
+;;     (concat s (repeat s (- n 1)))))
+
+;; C-x 8 RET 20e3
+
+(defun vritser/extract-var ()
+  "Extract yasnippet variable name."
+  (save-excursion
+    (beginning-of-line)
+    (kill-word 1)
+    (delete-char 1))
+  (yank))
 
 (provide 'init-funcs)
 ;;; init-funcs.el ends here

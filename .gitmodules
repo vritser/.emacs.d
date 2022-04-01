@@ -4,6 +4,6 @@
 [submodule "site-lisp/extensions/thing-edit"]
 	path = site-lisp/extensions/thing-edit
 	url = https://github.com/manateelazycat/thing-edit.git
-[submodule "site-lisp/extensions/snails"]
-	path = site-lisp/extensions/snails
-	url = https://github.com/manateelazycat/snails.git
+[submodule "site-lisp/extensions/restclient"]
+	path = site-lisp/extensions/restclient
+	url = https://github.com/vritser/restclient.el.git
