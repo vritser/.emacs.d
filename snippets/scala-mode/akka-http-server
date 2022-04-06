@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: akka http server
+# key: http
+# --
+val binding = Http()
+  .newServerAt("localhost", ${1:8080})
+  .bind(${2:route})
+
+println("Server online at http://localhost:$1/\nPress RETURN to stop...")
+StdIn.readLine()
+binding
+  .map(_.unbind())
+  .onComplete(_ => system.terminate())
