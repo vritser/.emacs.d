@@ -51,15 +51,15 @@
 ;;                 (:inherit (font-lock-keyword-face bold) :inverse-video t))))
 
 
-(use-package highlight-indent-guides
-  :hook (prog-mode . highlight-indent-guides-mode)
-  :init (setq highlight-indent-guides-method 'character
-		highlight-indent-guides-auto-enabled t
-		highlight-indent-guides-responsive 'top))
+;; (use-package highlight-indent-guides
+;;   :hook (prog-mode . highlight-indent-guides-mode)
+;;   :init (setq highlight-indent-guides-method 'character
+;; 		highlight-indent-guides-auto-enabled t
+;; 		highlight-indent-guides-responsive 'top))
 
-(use-package volatile-highlights
-  :diminish
-  :hook (after-init . volatile-highlights-mode))
+;; (use-package volatile-highlights
+;;   :diminish
+;;   :hook (after-init . volatile-highlights-mode))
 
 
 (use-package paren-face
