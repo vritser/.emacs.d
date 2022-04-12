@@ -94,26 +94,25 @@
 ;;                 (reusable-frames . visible)
 ;;                 (window-height . 0.5)))
 
-
-(use-package blamer
-  :ensure t
-  :bind (("s-i" . blamer-show-commit-info))
-  :defer 20
-  :custom
-  (blamer-type 'visual)
-  (blamer-idle-time 0.3)
-  (blamer-min-offset 70)
-  (blamer-author-formatter " ✎ %s ")
-  (blamer-datetime-formatter "[%s]")
-  (blamer-commit-formatter "● %s")
-  :custom-face
-  (blamer-face ((t :foreground "#7a88cf"
-                    :background nil
-                    :height 160
-		                :family "Monaco"
-                    :italic t)))
-  :config
-  (global-blamer-mode 1))
+;; git blame
+;; (use-package blamer
+;;   :bind (("s-i" . blamer-show-commit-info))
+;;   :defer 20
+;;   :custom
+;;   (blamer-type 'visual)
+;;   (blamer-idle-time 0.3)
+;;   (blamer-min-offset 70)
+;;   (blamer-author-formatter " ✎ %s ")
+;;   (blamer-datetime-formatter "[%s]")
+;;   (blamer-commit-formatter "● %s")
+;;   :custom-face
+;;   (blamer-face ((t :foreground "#7a88cf"
+;;                    :background nil
+;;                    :height 160
+;; 		               :family "Monaco"
+;;                    :italic t)))
+;;   :config
+;;   (global-blamer-mode 1))
 
 (use-package visual-regexp)
 
