@@ -116,5 +116,8 @@
 
 (use-package visual-regexp)
 
+(use-package magit)
+(use-package gitignore-mode)
+
 (provide 'init-tools)
 ;;; init-tools.el ends here
