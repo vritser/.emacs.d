@@ -57,7 +57,6 @@
 (require 'init-highlight)
 (require 'init-ivy)
 (require 'init-prog)
-(require 'init-magit)
 ;; (require 'init-web)
 (require 'init-js)
 (require 'init-scala)
