@@ -1,4 +1,5 @@
 elpa
+eln-cache
 .cache
 .lsp-*
 forge*
