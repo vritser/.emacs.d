@@ -1,12 +1,3 @@
-[submodule "site-lisp/extensions/awesome-pair"]
-	path = site-lisp/extensions/awesome-pair
-	url = https://github.com/manateelazycat/awesome-pair.git
-[submodule "site-lisp/extensions/thing-edit"]
-	path = site-lisp/extensions/thing-edit
-	url = https://github.com/manateelazycat/thing-edit.git
 [submodule "site-lisp/extensions/restclient"]
 	path = site-lisp/extensions/restclient
 	url = https://github.com/vritser/restclient.git
-[submodule "site-lisp/extensions/xah-fly-keys"]
-	path = site-lisp/extensions/xah-fly-keys
-	url = https://github.com/vritser/xah-fly-keys.git
