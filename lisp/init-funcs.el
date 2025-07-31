@@ -216,7 +216,7 @@ point reaches the beginning or end of the buffer, stop there."
   (require 'socks)
   (setq url-gateway-method 'socks
         socks-noproxy '("localhost")
-        socks-server '("Default server" "127.0.0.1" 1086 5))
+        socks-server '("Default server" "127.0.0.1" 7890 5))
   (proxy-socks-show))
 
 (defun proxy-socks-disable ()
@@ -233,7 +233,7 @@ point reaches the beginning or end of the buffer, stop there."
       (proxy-socks-disable)
     (proxy-socks-enable)))
 
-
+(proxy-socks-toggle)
 
 ;; (defun vr (&rest args)
 ;;   (print args))

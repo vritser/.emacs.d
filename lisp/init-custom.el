@@ -53,12 +53,12 @@
   :group 'centaur
   :type 'string)
 
-(defcustom centaur-proxy "127.0.0.1:1087"
+(defcustom centaur-proxy "127.0.0.1:1089"
   "Set network proxy."
   :group 'centaur
   :type 'string)
 
-(defcustom centaur-package-archives 'netease
+(defcustom centaur-package-archives 'melpa-mirror
   "Set package archives from which to fetch."
   :group 'centaur
   :type '(choice
@@ -95,7 +95,7 @@ If Non-nil, use dashboard, otherwise will restore previous session."
           (const :tag "eglot" 'eglot)
           nil))
 
-(defcustom centaur-lsp-format-on-save-ignore-modes '(c-mode c++-mode typescript-mode java-mode)
+(defcustom centaur-lsp-format-on-save-ignore-modes '(typescript-mode java-mode)
   "The modes that don't auto format and organize imports whilesaving the buffers."
   :group 'centaur
   :type 'list)

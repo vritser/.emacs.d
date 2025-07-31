@@ -82,7 +82,7 @@
         org-hide-emphasis-markers nil
         org-edit-src-content-indentation 0
         org-src-tab-acts-natively t
-        org-agenda-files '("~/org"))
+        org-agenda-files '("~/github/notebook/"))
 
   (require 'org-tempo)
   (require 'org-protocol)
@@ -217,17 +217,17 @@
                  "\n")))
 
   (setq-default org-capture-templates
-                '(("t" "TODO" entry (file+headline "~/org/gtd.org" "Tasks")
+                '(("t" "TODO" entry (file+headline "~/github/notebook/gtd.org" "Tasks")
                    "* TODO %?\n%i\n")
 
-                  ("s" "Code Snippet" entry (file+headline "~/org/snippets.org" "Code Snippets")
+                  ("s" "Code Snippet" entry (file+headline "~/github/notebook/snippets.org" "Code Snippets")
                    "** %^{title}\n#+BEGIN_SRC %^{language}\n%?\n#+END_SRC ")
 
-                  ("b" "Blog" entry (file+headline "~/org/blog.org" "Technical Blogs")
+                  ("b" "Blog" entry (file+headline "~/github/notebook/blog.org" "Technical Blogs")
                    (function v-org-hugo-new-subtree-post-capture-template) :empty-lines-after 1)
-                  ("p" "Protocol" entry (file+headline "~/org/notes.org" "Inbox")
+                  ("p" "Protocol" entry (file+headline "~/github/notebook/notes.org" "Inbox")
                    "* [[%:link][%:description]] \n\n%u \n\n%i\n%?\n")
-	                ("L" "Protocol Link" entry (file+headline "~/org/notes.org" "Inbox")
+	                ("L" "Protocol Link" entry (file+headline "~/github/notebook/notes.org" "Inbox")
                    "* %?[[%:link][%:description]] \nCaptured On: %U\n")))
 
   )

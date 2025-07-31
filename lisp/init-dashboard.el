@@ -74,7 +74,7 @@
            ("?" . dashboard-hydra/body)
            ("p" . dashboard-goto-projects))
     :hook (dashboard-mode . (lambda () (setq-local frame-title-format "")))
-    :init (dashboard-setup-startup-hook)
+    ;; :init (dashboard-setup-startup-hook)
     :config
     (setq dashboard-banner-logo-title "EMACS - Enjoy Programming & Writing"
           dashboard-startup-banner (or centaur-logo 'official)
