@@ -30,7 +30,7 @@
     (add-to-list 'load-path dir)
     (normal-top-level-add-subdirs-to-load-path)))
 
-(add-subdirs-to-load-path "~/.emacs.d/site-lisp/")
+(add-subdirs-to-load-path "~/.emacs.d/lisp/")
 
 (require 'init-const)
 (require 'init-custom)

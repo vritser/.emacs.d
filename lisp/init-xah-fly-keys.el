@@ -30,6 +30,8 @@
 
 ;;; Code:
 
+;; (setq xah-fly-use-control-key nil)
+(setq xah-fly-use-meta-key nil)
 (require 'xah-fly-keys)
 (xah-fly-keys-set-layout "dvorak")
 (xah-fly-keys t)
@@ -69,7 +71,7 @@
   (global-set-key (kbd "s-n") 'xah-new-empty-buffer)
 
   ;; visual regexp query/replace
-  (define-key xah-fly-t-keymap (kbd "p") 'vr/replace)
+  ;;(define-key xah-fly-t-keymap (kbd "p") 'vr/replace)
   (define-key xah-fly-leader-key-map (kbd "p") 'vr/query-replace)
 
   ;; projectile key map

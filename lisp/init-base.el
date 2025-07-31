@@ -92,10 +92,11 @@
 ;; Environment
 (when (or sys/mac-x-p sys/linux-x-p)
   (use-package exec-path-from-shell
+    :ensure t
     :init
-    (setq exec-path-from-shell-check-startup-files nil
-          exec-path-from-shell-variables '("PATH" "MANPATH")
+    (setq exec-path-from-shell-variables '("PATH" "MANPATH" "JAVA_HOME")
           exec-path-from-shell-arguments '("-l"))
+    (message "init shell variables")
     (exec-path-from-shell-initialize)))
 
 ;; Start server

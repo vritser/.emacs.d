@@ -36,8 +36,7 @@
          (lsp-mode . (lambda ()
                        ;; Format and organize imports
                        (unless (apply #'derived-mode-p centaur-lsp-format-on-save-ignore-modes)
-                         (add-hook 'before-save-hook #'lsp-format-buffer t t)
-                         (add-hook 'before-save-hook #'lsp-organize-imports t t)))))
+                         (add-hook 'before-save-hook #'lsp-format-buffer t t)))))
   :bind (:map lsp-mode-map
               ("M-RET" . lsp-execute-code-action)
 	            ("C-c C-d" . lsp-describe-thing-at-point)
@@ -106,22 +105,25 @@
 		          (set-face-background 'lsp-ui-doc-background
 				                           (face-background 'tooltip)))))
 
+;; (setq lsp-java-jdt-download-url "https://www.eclipse.org/downloads/download.php?file=/jdtls/milestones/1.45.0/jdt-language-server-1.45.0-202502271238.tar.gz")
 (use-package lsp-java
   :defer t
+  ;; :ensure t
   :hook (java-mode . (lambda () (require 'lsp-java)))
   :init
   (setq lsp-java-vmargs
         '(
-          "-noverify"
+          "-XX:+UseParallelGC"
+          "-XX:GCTimeRatio=4"
+          "-XX:AdaptiveSizePolicyWeight=90"
+          "-Dsun.zip.disableMemoryMapping=true"
           "-Xmx1G"
-          "-XX:+UseG1GC"
-          "-XX:+UseStringDeduplication"
+          "-Xms100m"
           ;; When you need to use lombok, uncomment the below and change it to your path
-          ;; "-javaagent:/Users/pi/.m2/repository/org/projectlombok/lombok/1.18.16/lombok-1.18.16.jar"
+          "-javaagent:/Users/ed/.m2/repository/org/projectlombok/lombok/1.18.32/lombok-1.18.32.jar"
           )
-
         ;; Don't organise imports on save
-        ;; lsp-java-save-actions-organize-imports nil
+        lsp-java-save-actions-organize-imports nil
         ))
 
 ;; to enable the lenses
