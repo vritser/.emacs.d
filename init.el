@@ -36,11 +36,11 @@
 (require 'init-custom)
 (require 'init-package)
 (require 'init-base)
+(require 'init-funcs)
 (require 'init-dashboard)
 
 (require 'init-thing-edit)
 (require 'init-tools)
-(require 'init-funcs)
 (require 'init-xah-fly-keys)
 (require 'init-projectile)
 (require 'init-ui)
@@ -61,7 +61,7 @@
 (require 'init-js)
 (require 'init-scala)
 (require 'init-org)
-(require 'init-org-roam)
+;; (require 'init-org-roam)
 (require 'init-flycheck)
 (require 'init-elfeed)
 

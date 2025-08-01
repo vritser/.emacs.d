@@ -27,17 +27,20 @@
 (use-package dashboard
     :diminish (dashboard-mode page-break-lines-mode)
     :defines persp-special-last-buffer
-    :functions (all-the-icons-faicon
-                all-the-icons-material
+    :functions (nerd-icons-faicon
+                nerd-icons-mdicon
                 open-custom-file
                 persp-get-buffer-or-null
                 persp-load-state-from-file
                 persp-switch-to-buffer
                 winner-undo
                 widget-forward)
-    :custom-face (dashboard-heading ((t (:inherit (font-lock-string-face bold)))))
+    :custom-face
+    (dashboard-heading ((t (:inherit (font-lock-string-face bold)))))
+    (dashboard-items-face ((t (:weight normal))))
+    (dashboard-no-items-face ((t (:weight normal))))
     ;; :pretty-hydra
-    ;; ((:title (pretty-hydra-title "Dashboard" 'material "dashboard" :height 1.1 :v-adjust -0.225)
+    ;; ((:title (pretty-hydra-title "Dashboard" 'material "nf-md-dashboard" :height 1.1 :v-adjust -0.225)
     ;;   :color pink :quit-key "q")
     ;;  ("Navigator"
     ;;   (("U" update-config-and-packages "update" :exit t)
@@ -73,61 +76,71 @@
            ("h" . dashboard-hydra/body)
            ("?" . dashboard-hydra/body)
            ("p" . dashboard-goto-projects))
-    :hook (dashboard-mode . (lambda () (setq-local frame-title-format "")))
-    ;; :init (dashboard-setup-startup-hook)
-    :config
+    :hook (dashboard-mode . (lambda () (setq-local frame-title-format nil)))
+    :init
     (setq dashboard-banner-logo-title "EMACS - Enjoy Programming & Writing"
           dashboard-startup-banner (or centaur-logo 'official)
+          dashboard-page-separator "\n\f\n"
+          ;; dashboard-projects-backend 'project-el
+          dashboard-path-style 'trucate-middle
+          dashboard-path-max-length 60
           dashboard-center-content t
+          dashboard-vertically-center-content t
           dashboard-show-shortcuts nil
           dashboard-items '((recents  . 10)
                             (bookmarks . 5)
                             (projects . 5))
 
-          dashboard-set-init-info t
+          dashboard-startupify-list '(dashboard-insert-banner
+                                      dashboard-insert-newline
+                                      dashboard-insert-banner-title
+                                      dashboard-insert-newline
+                                      dashboard-insert-navigator
+                                      dashboard-insert-newline
+                                      dashboard-insert-init-info
+                                      dashboard-insert-items
+                                      dashboard-insert-newline
+                                      dashboard-insert-footer)
+
+          dashboard-display-icons-p #'icons-displayable-p
           dashboard-set-file-icons t
           dashboard-set-heading-icons t
-          dashboard-heading-icons '((recents   . "file-text")
-                                    (bookmarks . "bookmark")
-                                    (agenda    . "calendar")
-                                    (projects  . "file-directory")
-                                    (registers . "database"))
+          dashboard-heading-icons '((recents   . "nf-oct-history")
+                                    (bookmarks . "nf-oct-bookmark")
+                                    (agenda    . "nf-oct-calendar")
+                                    (projects  . "nf-oct-briefcase")
+                                    (registers . "nf-oct-database"))
 
-          dashboard-set-footer t
-          dashboard-footer (format "Powered by vritser, %s" (format-time-string "%Y"))
-          dashboard-footer-icon (cond ((display-graphic-p)
-                                       (all-the-icons-faicon "heart"
-                                                             :height 1.1
-                                                             :v-adjust -0.05
-                                                             :face 'error))
-                                      ((char-displayable-p ?🧡) "🧡 ")
-                                      (t (propertize ">" 'face 'font-lock-doc-face)))
-
-          dashboard-set-navigator t
           dashboard-navigator-buttons
-          `(((,(when (display-graphic-p)
-                 (all-the-icons-octicon "mark-github" :height 1.1 :v-adjust 0.0))
+          `(((,(when (icons-displayable-p)
+                 (nerd-icons-mdicon "nf-md-github" :height 1.4))
               "Homepage" "Browse homepage"
               (lambda (&rest _) (browse-url centaur-homepage)))
-             (,(when (display-graphic-p)
-                 (all-the-icons-material "restore" :height 1.35 :v-adjust -0.24))
+             (,(when (icons-displayable-p)
+                 (nerd-icons-mdicon "nf-md-backup_restore" :height 1.5))
               "Restore" "Restore previous session"
               (lambda (&rest _) (restore-session)))
-             (,(when (display-graphic-p)
-                 (all-the-icons-octicon "tools" :height 1.0 :v-adjust 0.0))
+             (,(when (icons-displayable-p)
+                 (nerd-icons-mdicon "nf-md-tools" :height 1.3))
               "Settings" "Open custom file"
               (lambda (&rest _) (find-file custom-file)))
-             (,(when (display-graphic-p)
-                 (all-the-icons-material "update" :height 1.35 :v-adjust -0.24))
+             (,(when (icons-displayable-p)
+                 (nerd-icons-mdicon "nf-md-update" :height 1.3))
               "Update" "Update Centaur Emacs"
               (lambda (&rest _) (centaur-update)))
-             (,(if (display-graphic-p)
-                   (all-the-icons-faicon "question" :height 1.2 :v-adjust -0.1)
+             (,(if (icons-displayable-p)
+                   (nerd-icons-mdicon "nf-md-help" :height 1.2)
                  "?")
               "" "Help (?/h)"
-              (lambda (&rest _) (dashboard-hydra/body))
-              font-lock-string-face))))
+              (lambda (&rest _) (dashboard-hydra/body)))))
 
+          ;; dashboard-footer (format "Powered by vritser, %s" (format-time-string "%Y"))
+          dashboard-footer-icon
+          (if (icons-displayable-p)
+              (nerd-icons-octicon "nf-oct-heart" :height 1.2 :face 'nerd-icons-lred)
+            (propertize ">" 'face 'dashboard-footer)))
+    (dashboard-setup-startup-hook)
+    :config
     (defun my-banner-path (&rest _)
       "Return the full path to banner."
       (expand-file-name "banner.txt" user-emacs-directory))
