@@ -36,7 +36,8 @@
   (setq enable-recursive-minibuffers t)
 
   (setq ivy-use-selectable-prompt t
-	      ivy-use-virtual-buffers t
+      ;; 关闭 virtual-buffers，加快响应
+	      ivy-use-virtual-buffers nil
 	      ivy-height 10
 	      ivy-count-format "%d "
 	      ivy-on-del-error-function nil)
@@ -49,9 +50,6 @@
   :config
   (with-eval-after-load 'projectile
     (setq-default projectile-completion-system 'ivy))
-
-  (use-package smex))
-
 
 (provide 'init-ivy)
 ;;; init-ivy.el ends here

@@ -31,6 +31,10 @@
   (setq projectile-mode-line-prefix ""
 	      projectile-sort-order 'recentf
 	      projectile-use-git-grep t
+        ;; 使用外部工具索引（git ls-files 等），比 native 快 10x+
+        projectile-indexing-method 'alien
+        ;; 启用缓存，避免重复索引
+        projectile-enable-caching t
         projectile-globally-ignored-file-suffixes
         '(
           "blob"
