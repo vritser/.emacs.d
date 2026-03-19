@@ -30,13 +30,6 @@
 
 ;;; Code:
 
-;; (use-package plantuml-mode
-;;   :defer t
-;;   :init
-;;   (setq plantuml-default-exec-mode 'jar
-;;         org-plantuml-jar-path "~/tools/plantuml.jar"
-;;         plantuml-jar-path "~/tools/plantuml.jar"))
-
 (with-eval-after-load 'restclient
   (add-to-list 'auto-mode-alist '("\\.http\\'" . restclient-mode)))
 
@@ -47,19 +40,6 @@
         navicat-db-port "20617"
         navicat-db-user "root"
         navicat-db-passwd "qweQWE!@#"))
-
-;; (use-package restclient
-  ;; :mode ("\\.http\\'" . restclient-mode)
-;;   :config
-;;   (use-package restclient-test
-;;     :diminish
-;;     :hook (restclient-mode . restclient-test-mode))
-
-;;   (with-eval-after-load 'company
-;;     (use-package company-restclient
-;;       :defines company-backends
-  ;;       :init (add-to-list 'company-backends 'company-restclient)))
-  ;; )
 
 (use-package youdao-dictionary
   :commands youdao-dictionary-play-voice-of-current-word
@@ -78,46 +58,7 @@
         (youdao-dictionary-search-at-point-tooltip))
       (youdao-dictionary-search-at-point))))
 
-;; (use-package vterm)
-;; (use-package vterm-toggle
-;;   :bind ("C-`" . vterm-toggle)
-;;   :ensure t)
-
-;; (setq vterm-toggle-fullscreen-p nil)
-;; (add-to-list 'display-buffer-alist
-;;              '((lambda(bufname _) (with-current-buffer bufname (equal major-mode 'vterm-mode)))
-;;                 (display-buffer-reuse-window display-buffer-at-bottom)
-;;                 ;;(display-buffer-reuse-window display-buffer-in-direction)
-;;                 ;;display-buffer-in-direction/direction/dedicated is added in emacs27
-;;                 ;;(direction . bottom)
-;;                 ;;(dedicated . t) ;dedicated is supported in emacs27
-;;                 (reusable-frames . visible)
-;;                 (window-height . 0.5)))
-
-;; git blame
-;; (use-package blamer
-;;   :bind (("s-i" . blamer-show-commit-info))
-;;   :defer 20
-;;   :custom
-;;   (blamer-type 'visual)
-;;   (blamer-idle-time 0.3)
-;;   (blamer-min-offset 70)
-;;   (blamer-author-formatter " ✎ %s ")
-;;   (blamer-datetime-formatter "[%s]")
-;;   (blamer-commit-formatter "● %s")
-;;   :custom-face
-;;   (blamer-face ((t :foreground "#7a88cf"
-;;                    :background nil
-;;                    :height 160
-;; 		               :family "Monaco"
-;;                    :italic t)))
-;;   :config
-;;   (global-blamer-mode 1))
-
 (use-package visual-regexp)
-
-(use-package magit)
-;; (use-package gitignore-mode)
 
 (provide 'init-tools)
 ;;; init-tools.el ends here
