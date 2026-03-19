@@ -411,5 +411,25 @@ point reaches the beginning or end of the buffer, stop there."
       (buffer-substring-no-properties (region-beginning) (region-end))
     (thing-at-point 'symbol t)))
 
+;; UI
+(defvar after-load-theme-hook nil
+  "Hook run after a color theme is loaded using `load-theme'.")
+(defun run-after-load-theme-hook (&rest _)
+  "Run `after-load-theme-hook'."
+  (run-hooks 'after-load-theme-hook))
+
+(if (boundp 'enable-theme-functions)    ; Introduced in 29.1
+    (add-hook 'enable-theme-functions #'run-after-load-theme-hook)
+  (advice-add #'load-theme :after #'run-after-load-theme-hook))
+
+(defun childframe-workable-p ()
+  "Whether childframe is workable."
+  (and (>= emacs-major-version 26)
+       (not noninteractive)
+       (not emacs-basic-display)
+       (or (display-graphic-p)
+           (featurep 'tty-child-frames))
+       (eq (frame-parameter (selected-frame) 'minibuffer) 't)))
+
 (provide 'init-funcs)
 ;;; init-funcs.el ends here

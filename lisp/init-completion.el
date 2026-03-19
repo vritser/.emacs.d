@@ -31,7 +31,8 @@
 ;;; Code:
 
 (eval-when-compile
-  (require 'init-const))
+  (require 'init-const)
+  (require 'init-funcs))
 
 ;; Optionally use the `orderless' completion style.
 (use-package orderless
@@ -64,14 +65,14 @@
 
 ;; Display vertico in the child frame
 (use-package vertico-posframe
-  :functions (childframe-completion-workable-p
+  :functions (childframe-workable-p
               posframe-poshandler-frame-center-near-bottom)
   :commands vertico-posframe-mode
   :hook ((server-after-make-frame vertico-mode)
          .
          (lambda ()
            "Handle vertico child frame."
-           (and (childframe-completion-workable-p)
+           (and (childframe-workable-p)
                 (vertico-posframe-mode 1))))
   :init (setq vertico-posframe-poshandler
               #'posframe-poshandler-frame-center-near-bottom
