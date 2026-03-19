@@ -1,9 +1,9 @@
 ;; init-base.el --- Better default configurations.	-*- lexical-binding: t -*-
 
-;; Copyright (C) 2019 Vincent Zhang
+;; Copyright (C) 2020  vritser
 
-;; Author: Vincent Zhang <seagle0128@gmail.com>
-;; URL: https://github.com/seagle0128/.emacs.d
+;; Author: vritser <vritser@gmail.com>
+;; Keywords: preference
 
 ;; This file is not part of GNU Emacs.
 ;;
@@ -90,7 +90,11 @@
       default-process-coding-system '(utf-8 . utf-8))
 
 ;; Environment
-(when (or sys/mac-x-p sys/linux-x-p)
+
+;; exec-path-from-shell: only needed on macOS (when path not injected) and Linux
+(when (or (and sys/mac-x-p
+               (not (bound-and-true-p ns-emacs-plus-injected-path)))
+          sys/linuxp)
   (use-package exec-path-from-shell
     :ensure t
     :init
