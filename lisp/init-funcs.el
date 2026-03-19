@@ -429,7 +429,8 @@ point reaches the beginning or end of the buffer, stop there."
        (not emacs-basic-display)
        (or (display-graphic-p)
            (featurep 'tty-child-frames))
-       (eq (frame-parameter (selected-frame) 'minibuffer) 't)))
+       (eq (frame-parameter (selected-frame) 'minibuffer) 't)
+       (featurep 'childframe)))
 
 (provide 'init-funcs)
 ;;; init-funcs.el ends here
