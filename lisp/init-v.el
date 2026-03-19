@@ -133,7 +133,7 @@
 ;; (global-set-key (kbd "C-x d") 'v-dired-open-dir)
 ;; (global-set-key (kbd "C-x C-d") 'v-dired-open-dir)
 
-(global-set-key [C-tab] '(lambda ()
+(global-set-key [C-tab] #'(lambda ()
                                  (interactive)
                                  (switch-to-buffer (other-buffer))))
                                  ;;(switch-to-buffer (other-buffer (current-buffer) 1))))
