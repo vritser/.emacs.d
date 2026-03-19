@@ -42,37 +42,25 @@
 (require 'init-thing-edit)
 (require 'init-tools)
 (require 'init-xah-fly-keys)
-(require 'init-projectile)
+
+(require 'init-completion)
 (require 'init-ui)
 (require 'init-v)
 
 (require 'init-yasnippet)
 (require 'init-awesome-pair)
-(require 'init-company)
-;; (require 'init-corfu)
-;; (require 'init-consult)
+
 (require 'init-go)
 (require 'init-lsp)
-;; (require 'init-nox)
 (require 'init-highlight)
-(require 'init-ivy)
 (require 'init-prog)
-;; (require 'init-web)
 (require 'init-js)
 (require 'init-scala)
 (require 'init-org)
-;; (require 'init-org-roam)
 (require 'init-flycheck)
 (require 'init-elfeed)
-
-;; (require 'eaf)
-;; (require 'eaf-browser)
-;; (require 'eaf-vue-demo)
-;; (require 'eaf-demo)
-;; (setq eaf-enable-debug nil)
 
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
 
-;; (provide 'init)
 ;;; init.el ends here

@@ -405,5 +405,11 @@ point reaches the beginning or end of the buffer, stop there."
     (delete-char 1))
   (yank))
 
+(defun selected-region-or-symbol-at-point ()
+  "Return the selected region text or symbol at point."
+  (if (region-active-p)
+      (buffer-substring-no-properties (region-beginning) (region-end))
+    (thing-at-point 'symbol t)))
+
 (provide 'init-funcs)
 ;;; init-funcs.el ends here
