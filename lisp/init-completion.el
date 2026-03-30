@@ -447,6 +447,8 @@ targets."
   ;; (add-to-list 'completion-at-point-functions #'cape-abbrev)
 
   ;; Make these capfs composable.
+  ;; Use cape-wrap-buster for LSP to bust cache on input changes
+  (advice-add 'lsp-completion-at-point :around #'cape-wrap-buster)
   (advice-add 'lsp-completion-at-point :around #'cape-wrap-noninterruptible)
   (advice-add 'lsp-completion-at-point :around #'cape-wrap-nonexclusive)
   (advice-add 'comint-completion-at-point :around #'cape-wrap-nonexclusive)
