@@ -42,6 +42,7 @@
 (require 'init-thing-edit)
 (require 'init-tools)
 (require 'init-xah-fly-keys)
+(require 'init-agent-shell)
 
 (require 'init-completion)
 (require 'init-ui)

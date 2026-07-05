@@ -1,5 +1,6 @@
 elpa
 eln-cache
+*.elc
 .cache
 .lsp-*
 forge*
@@ -30,3 +31,4 @@ smex-items
 tramp
 tutorial/
 url/
+/.agent-shell/
