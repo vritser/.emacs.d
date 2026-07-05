@@ -150,11 +150,6 @@
 ;; snails
 ;; (global-set-key (kbd "C-c C-s") 'snails)
 
-;; Projectile configuration shortkey
-;; (global-set-key (kbd "C-x p p") 'projectile-switch-project)
-;; (global-set-key (kbd "C-x p f") 'projectile-find-file)
-;; (global-set-key (kbd "C-x p b") 'projectile-switch-to-buffer)
-
 
 ;; erc proxy
 ;; (setq socks-noproxy '("localhost"))
