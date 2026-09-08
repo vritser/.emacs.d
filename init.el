@@ -53,7 +53,7 @@
 (require 'init-awesome-pair)
 
 (require 'init-go)
-(require 'init-lsp)
+(require 'init-eglot)
 (require 'init-highlight)
 (require 'init-prog)
 (require 'init-js)

@@ -452,7 +452,14 @@ targets."
   (advice-add 'lsp-completion-at-point :around #'cape-wrap-noninterruptible)
   (advice-add 'lsp-completion-at-point :around #'cape-wrap-nonexclusive)
   (advice-add 'comint-completion-at-point :around #'cape-wrap-nonexclusive)
-  (advice-add 'eglot-completion-at-point :around #'cape-wrap-buster)
+  ;; Do NOT wrap eglot with cape-wrap-buster: combined with `orderless'
+  ;; (and corfu), the buster re-invokes the capf mid-completion, which
+  ;; re-snapshots eglot's completion session (orig-pos/bounds) while
+  ;; corfu is inserting, making the completion text be inserted twice.
+  ;; See https://github.com/minad/corfu/issues/415 (and
+  ;; https://github.com/minad/corfu/issues/358).  Eglot already refreshes
+  ;; its completion cache on input change (eglot--capf-session recall +
+  ;; `:cancel-on-input t'), so the buster is redundant here.
   (advice-add 'eglot-completion-at-point :around #'cape-wrap-nonexclusive)
   (advice-add 'pcomplete-completions-at-point :around #'cape-wrap-nonexclusive))
 
