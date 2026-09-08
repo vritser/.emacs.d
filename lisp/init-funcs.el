@@ -249,7 +249,7 @@ point reaches the beginning or end of the buffer, stop there."
   (require 'socks)
   (setq url-gateway-method 'socks
         socks-noproxy '("localhost")
-        socks-server '("Default server" "127.0.0.1" 7890 5))
+        socks-server '("Default server" "127.0.0.1" 7897 5))
   (proxy-socks-show))
 
 (defun proxy-socks-disable ()
@@ -431,6 +431,7 @@ point reaches the beginning or end of the buffer, stop there."
            (featurep 'tty-child-frames))
        (eq (frame-parameter (selected-frame) 'minibuffer) 't)
        (featurep 'childframe)))
+
 
 (provide 'init-funcs)
 ;;; init-funcs.el ends here

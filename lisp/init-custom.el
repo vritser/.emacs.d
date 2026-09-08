@@ -53,12 +53,12 @@
   :group 'centaur
   :type 'string)
 
-(defcustom centaur-proxy "127.0.0.1:1089"
+(defcustom centaur-proxy "127.0.0.1:7897"
   "Set network proxy."
   :group 'centaur
   :type 'string)
 
-(defcustom centaur-package-archives 'melpa-mirror
+(defcustom centaur-package-archives 'melpa
   "Set package archives from which to fetch."
   :group 'centaur
   :type '(choice
